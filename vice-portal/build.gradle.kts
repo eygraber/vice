@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-  namespace = "com.eygraber.vice"
+  namespace = "com.eygraber.vice.portal"
 }
 
 kotlin {
@@ -16,11 +16,19 @@ kotlin {
   )
 
   sourceSets {
+    androidMain {
+      dependencies {
+        implementation(libs.compose.android.activity)
+      }
+    }
     commonMain {
       dependencies {
+        implementation(projects.viceCore)
+
         implementation(compose.runtime)
 
         implementation(libs.kotlinx.coroutines.core)
+        implementation(libs.portalCompose)
       }
     }
 
