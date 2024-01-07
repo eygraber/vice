@@ -1,0 +1,56 @@
+[versions]
+agp = "8.3.0-beta01"
+
+android-sdk-compile = "34"
+android-sdk-target = "34"
+android-sdk-min = "24"
+
+composeJetbrains = "1.6.0-alpha01"
+
+conventions = "0.0.65"
+
+detekt = "1.23.4"
+detektEygraber = "1.0.11"
+
+dokka = "1.9.10"
+
+kodein = "7.21.1"
+kotlin = "1.9.22"
+
+kotlinInject = "0.7.0-SNAPSHOT"
+
+kotlinx-coroutines = "1.8.0-RC2"
+
+ksp = "1.9.22-1.0.16"
+
+ktlint = "1.1.0"
+
+publish = "0.27.0"
+
+[plugins]
+conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
+
+[libraries]
+buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "3.0" }
+buildscript-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetbrains" }
+buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
+buildscript-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
+
+compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.7.1"
+
+detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
+detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
+
+kodein-core = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlinInject" }
+kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlinInject" }
+
+# not actually used; just here so renovate picks it up
+ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }

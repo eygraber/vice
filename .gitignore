@@ -1,0 +1,14 @@
+*.iml
+.gradle
+.kotlin
+/local.properties
+/.idea
+# Make an exception for the code style
+!.idea/codeStyles/
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+danger_out.json
+tmp

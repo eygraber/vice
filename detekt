@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./gradlew detektAndroidRelease detektCommonJsMain detektJvmMain detektMetadataMain
