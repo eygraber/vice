@@ -5,6 +5,8 @@ android-sdk-compile = "34"
 android-sdk-target = "34"
 android-sdk-min = "24"
 
+androidx-activity = "1.8.2"
+
 composeJetbrains = "1.6.0-alpha01"
 
 conventions = "0.0.65"
@@ -40,6 +42,7 @@ buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ver
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 buildscript-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
+compose-android-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.7.1"
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
@@ -54,3 +57,5 @@ kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", ver
 
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
+
+portalCompose = "com.eygraber:portal-compose:0.9.29-SNAPSHOT"
