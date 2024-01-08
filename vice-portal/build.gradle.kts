@@ -23,12 +23,13 @@ kotlin {
     }
     commonMain {
       dependencies {
-        implementation(projects.viceCore)
+        api(projects.viceCore)
 
         implementation(compose.runtime)
 
         implementation(libs.kotlinx.coroutines.core)
-        implementation(libs.portalCompose)
+
+        api(libs.portalCompose)
       }
     }
 
