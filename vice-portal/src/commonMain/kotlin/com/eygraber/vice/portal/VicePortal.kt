@@ -25,12 +25,15 @@ public abstract class VicePortal<K, V, I, C, E, S> : ComposePortal<K>
   protected abstract val effects: E
 
   @Composable
+  protected abstract fun OnBackPressedHandler(enabled: Boolean, onBackPressed: () -> Unit)
+
+  @Composable
   public final override fun Render() {
     val scope = rememberCoroutineScope {
       Dispatchers.Main.immediate
     }
 
-    BackHandler(enabled = compositor.isBackHandlerEnabled()) {
+    OnBackPressedHandler(enabled = compositor.isBackHandlerEnabled()) {
       compositor.onBackPressed { intent ->
         // this is synchronous because the dispatcher is Main.immediate
         scope.launch {

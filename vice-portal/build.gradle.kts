@@ -16,11 +16,6 @@ kotlin {
   )
 
   sourceSets {
-    androidMain {
-      dependencies {
-        implementation(libs.compose.android.activity)
-      }
-    }
     commonMain {
       dependencies {
         api(projects.viceCore)
