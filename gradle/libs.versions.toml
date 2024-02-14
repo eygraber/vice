@@ -58,4 +58,4 @@ kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", ver
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
-portalCompose = "com.eygraber:portal-compose:0.9.29"
+portalCompose = "com.eygraber:portal-compose:0.9.30-SNAPSHOT"
