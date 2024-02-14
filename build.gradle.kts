@@ -53,7 +53,7 @@ gradleConventionsDefaults {
 gradleConventionsKmpDefaults {
   targets(
     KmpTarget.Android,
-    KmpTarget.Ios,
+    // KmpTarget.Ios, https://github.com/JetBrains/compose-multiplatform/issues/4277
     KmpTarget.Js,
     KmpTarget.Jvm,
     KmpTarget.WasmJs,
