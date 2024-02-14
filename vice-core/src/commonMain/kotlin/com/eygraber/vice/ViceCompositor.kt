@@ -5,12 +5,20 @@ import kotlinx.coroutines.flow.Flow
 
 public abstract class ViceCompositor<Intent, State> {
   @Composable
-  internal abstract fun composite(intents: Flow<Intent>): State
-
-  internal open suspend fun onIntent(intent: Intent) {}
+  internal fun internalComposite(intents: Flow<Intent>): State = composite(intents)
 
   @Composable
-  internal open fun isBackHandlerEnabled(): Boolean = false
+  protected abstract fun composite(intents: Flow<Intent>): State
 
-  internal open fun onBackPressed(emitIntent: (Intent) -> Unit) {}
+  internal suspend fun internalOnIntent(intent: Intent) = onIntent(intent)
+  protected open suspend fun onIntent(intent: Intent) {}
+
+  @Composable
+  internal fun internalIsBackHandlerEnabled(): Boolean = isBackHandlerEnabled()
+
+  @Composable
+  protected open fun isBackHandlerEnabled(): Boolean = false
+
+  internal fun internalOnBackPressed(emitIntent: (Intent) -> Unit) = onBackPressed(emitIntent)
+  protected open fun onBackPressed(emitIntent: (Intent) -> Unit) {}
 }

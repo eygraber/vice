@@ -33,11 +33,11 @@ public abstract class VicePortal<K, V, I, C, E, S> : ComposePortal<K>
       Dispatchers.Main.immediate
     }
 
-    OnBackPressedHandler(enabled = compositor.isBackHandlerEnabled()) {
-      compositor.onBackPressed { intent ->
+    OnBackPressedHandler(enabled = compositor.internalIsBackHandlerEnabled()) {
+      compositor.internalOnBackPressed { intent ->
         // this is synchronous because the dispatcher is Main.immediate
         scope.launch {
-          compositor.onIntent(intent)
+          compositor.internalOnIntent(intent)
         }
 
         intents.tryEmit(intent)
@@ -54,6 +54,7 @@ public abstract class VicePortal<K, V, I, C, E, S> : ComposePortal<K>
   }
 }
 
+@Suppress("NOTHING_TO_INLINE")
 @Composable
 private inline fun <I, S> Render(
   view: ViceView<I, S>,
@@ -64,17 +65,17 @@ private inline fun <I, S> Render(
 ) {
   effects.Launch()
 
-  val state = compositor.composite(intents)
-  val intentHandler = remember(scope, compositor, intents) {
+  val state = compositor.internalComposite(intents)
+  val intentHandler: (I) -> Unit = remember(scope, compositor, intents) {
     { intent: I ->
       // this is synchronous because the dispatcher is Main.immediate
       scope.launch {
-        compositor.onIntent(intent)
+        compositor.internalOnIntent(intent)
       }
 
       (intents as MutableSharedFlow<I>).tryEmit(intent)
     }
   }
 
-  view(state, intentHandler)
+  view.Render(state, intentHandler)
 }
