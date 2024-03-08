@@ -23,7 +23,7 @@ kotlinInject = "0.7.0-SNAPSHOT"
 
 kotlinx-coroutines = "1.8.0"
 
-ksp = "1.9.22-1.0.18"
+ksp = "1.9.23-1.0.19"
 
 ktlint = "1.2.1"
 
@@ -43,7 +43,7 @@ buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", v
 buildscript-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
 compose-android-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
-compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.8.1"
+compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.10"
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
