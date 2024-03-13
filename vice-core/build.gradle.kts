@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
   id("com.eygraber.conventions-android-library")
@@ -15,7 +17,25 @@ kotlin {
     project = project,
   )
 
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  applyDefaultHierarchyTemplate {
+    common {
+      group("notAndroid") {
+        withIos()
+        withJs()
+        withJvm()
+        withWasm()
+      }
+    }
+  }
+
   sourceSets {
+    androidMain {
+      dependencies {
+        implementation(libs.compose.lifecycle)
+      }
+    }
+
     commonMain {
       dependencies {
         implementation(compose.runtime)

@@ -5,9 +5,8 @@ android-sdk-compile = "34"
 android-sdk-target = "34"
 android-sdk-min = "24"
 
-androidx-activity = "1.8.2"
-
 composeJetbrains = "1.6.0"
+composeLifecycle = "2.8.0-alpha02"
 
 conventions = "0.0.69"
 
@@ -16,14 +15,9 @@ detektEygraber = "1.0.11"
 
 dokka = "1.9.20"
 
-kodein = "7.21.2"
 kotlin = "1.9.23"
 
-kotlinInject = "0.7.0-SNAPSHOT"
-
 kotlinx-coroutines = "1.8.0"
-
-ksp = "1.9.23-1.0.19"
 
 ktlint = "1.2.1"
 
@@ -40,20 +34,14 @@ buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugi
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
-buildscript-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
-compose-android-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.10"
+compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
 
-kodein-core = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
-
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
-
-kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlinInject" }
-kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlinInject" }
 
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }

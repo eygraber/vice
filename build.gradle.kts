@@ -10,7 +10,6 @@ buildscript {
     classpath(libs.buildscript.detekt)
     classpath(libs.buildscript.dokka)
     classpath(libs.buildscript.kotlin)
-    classpath(libs.buildscript.ksp)
     classpath(libs.buildscript.publish)
   }
 }
