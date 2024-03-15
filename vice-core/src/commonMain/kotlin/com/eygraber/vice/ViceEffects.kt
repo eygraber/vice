@@ -17,6 +17,7 @@ public abstract class ViceEffects {
 @Composable
 internal fun ViceEffects.Launch() {
   LaunchedEffect(Unit) {
+    @Suppress("InjectDispatcher")
     launch(Dispatchers.Default) {
       initialize(this)
     }

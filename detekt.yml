@@ -319,6 +319,8 @@ performance:
   active: true
   ArrayPrimitive:
     active: true
+  CouldBeSequence:
+    active: true
   ForEachOnRange:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
