@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
   id("com.eygraber.conventions-android-library")
@@ -7,7 +9,7 @@ plugins {
 }
 
 android {
-  namespace = "com.eygraber.vice"
+  namespace = "com.eygraber.vice.sources"
 }
 
 kotlin {
@@ -15,12 +17,32 @@ kotlin {
     project = project,
   )
 
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  applyDefaultHierarchyTemplate {
+    common {
+      group("notAndroid") {
+        withIos()
+        withJs()
+        withJvm()
+        withWasm()
+      }
+    }
+  }
+
   sourceSets {
+    androidMain {
+      dependencies {
+        implementation(libs.compose.lifecycle)
+      }
+    }
+
     commonMain {
       dependencies {
-        implementation(compose.runtime)
+        api(projects.viceCore)
 
-        implementation(libs.kotlinx.coroutines.core)
+        api(compose.runtime)
+
+        api(libs.kotlinx.coroutines.core)
       }
     }
 
