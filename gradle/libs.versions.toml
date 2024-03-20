@@ -6,7 +6,7 @@ android-sdk-target = "34"
 android-sdk-min = "24"
 
 composeJetbrains = "1.6.1"
-composeLifecycle = "2.8.0-alpha02"
+composeLifecycle = "2.8.0-alpha03"
 
 conventions = "0.0.70"
 
