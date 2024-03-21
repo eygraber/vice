@@ -76,7 +76,7 @@ private inline fun <I, S> ViceUdf(
 ) {
   effects.Launch()
 
-  val state = compositor.internalComposite(intents)
+  val state = compositor.composite()
   val intentHandler: (I) -> Unit = remember(scope, compositor, intents) {
     { intent: I ->
       // this is synchronous because the dispatcher is Main.immediate
