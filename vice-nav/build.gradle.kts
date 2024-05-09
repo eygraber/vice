@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-  namespace = "com.eygraber.vice"
+  namespace = "com.eygraber.vice.nav"
 }
 
 kotlin {
@@ -18,9 +18,14 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
+        api(projects.viceCore)
+
         implementation(compose.runtime)
 
         implementation(libs.kotlinx.coroutines.core)
+
+        api(libs.compose.navigation)
+        api(libs.uri)
       }
     }
 
@@ -28,12 +33,6 @@ kotlin {
       dependencies {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
-      }
-    }
-
-    jvmMain {
-      dependencies {
-        implementation(libs.kotlinx.coroutines.swing)
       }
     }
   }

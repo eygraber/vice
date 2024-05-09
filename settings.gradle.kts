@@ -42,6 +42,7 @@ dependencyResolutionManagement {
   // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
   repositories {
+    mavenLocal()
     addCommonRepositories(
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
@@ -58,9 +59,13 @@ plugins {
 
 rootProject.name = "vice"
 
-include("vice-core")
-include("vice-portal")
-include("vice-sources")
+include(":samples:nav:androidApp")
+include(":samples:nav:desktopApp")
+include(":samples:nav:shared")
+include(":vice-core")
+include(":vice-nav")
+include(":vice-portal")
+include(":vice-sources")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

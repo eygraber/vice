@@ -17,7 +17,8 @@ public interface ViceContainer<V, I, C, E, S>
   public val effects: E
 
   @Composable
-  public fun OnBackPressedHandler(enabled: Boolean, onBackPressed: () -> Unit)
+  public fun OnBackPressedHandler(enabled: Boolean, onBackPressed: () -> Unit) {
+  }
 
   @Composable
   public fun Vice() {
