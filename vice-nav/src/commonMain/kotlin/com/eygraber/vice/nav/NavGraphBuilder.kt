@@ -1,5 +1,6 @@
 package com.eygraber.vice.nav
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -79,7 +80,7 @@ public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     AnimatedContentTransitionScope<NavBackStackEntry>.() ->
     @JvmSuppressWildcards SizeTransform?
   )? = null,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *, *>,
+  crossinline destinationFactory: AnimatedContentScope.(T) -> ViceDestination<*, *, *, *, *>,
 ) {
   composable<T>(
     typeMap,
@@ -90,7 +91,7 @@ public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     popExitTransition,
     sizeTransform,
   ) {
-    remember(it) { destinationFactory(it.toRoute<T>()) }.Vice()
+    remember(it) { destinationFactory(this, it.toRoute<T>()) }.Vice()
   }
 }
 
