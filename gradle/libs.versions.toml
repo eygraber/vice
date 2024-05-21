@@ -5,8 +5,8 @@ android-sdk-compile = "34"
 android-sdk-target = "34"
 android-sdk-min = "24"
 
-composeJetbrains = "1.6.10"
-composeLifecycle = "2.8.0"
+composeJetbrains = "1.6.10-rc02"
+composeLifecycle = "2.8.0-rc03"
 
 conventions = "0.0.74"
 

@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
@@ -18,6 +19,18 @@ kotlin {
   defaultKmpTargets(
     project = project,
   )
+
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  applyDefaultHierarchyTemplate {
+    common {
+      group("notWasm") {
+        withAndroidTarget()
+        withIos()
+        withJs()
+        withJvm()
+      }
+    }
+  }
 
   sourceSets {
     commonMain {
