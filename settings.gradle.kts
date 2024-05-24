@@ -52,9 +52,10 @@ plugins {
 
 rootProject.name = "vice"
 
-include("vice-core")
-include("vice-portal")
-include("vice-sources")
+include(":vice-core")
+include(":vice-nav")
+include(":vice-portal")
+include(":vice-sources")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
