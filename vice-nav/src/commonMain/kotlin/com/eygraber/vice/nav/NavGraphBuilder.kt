@@ -14,13 +14,12 @@ import androidx.navigation.compose.dialog
 import com.eygraber.vice.ViceCompositor
 import com.eygraber.vice.ViceContainer
 import com.eygraber.vice.ViceEffects
-import com.eygraber.vice.ViceView
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlin.jvm.JvmSuppressWildcards
 
-public abstract class ViceDestination<V, I, C, E, S> : ViceContainer<V, I, C, E, S>
-  where V : ViceView<I, S>, C : ViceCompositor<I, S>, E : ViceEffects {
+public abstract class ViceDestination<I, C, E, S> : ViceContainer<I, C, E, S>
+  where C : ViceCompositor<I, S>, E : ViceEffects {
   final override val intents: SharedFlow<I> = MutableSharedFlow(extraBufferCapacity = 64)
 }
 
@@ -38,7 +37,7 @@ public inline fun NavGraphBuilder.viceComposable(
   noinline popExitTransition:
   (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? =
     exitTransition,
-  crossinline destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *, *>,
+  crossinline destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *>,
 ) {
   composable(
     route,
@@ -58,7 +57,7 @@ public fun NavGraphBuilder.viceDialog(
   arguments: List<NamedNavArgument> = emptyList(),
   deepLinks: List<NavDeepLink> = emptyList(),
   dialogProperties: DialogProperties = DialogProperties(),
-  destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *, *>,
+  destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *>,
 ) {
   dialog(
     route,

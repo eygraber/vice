@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
-public interface ViceContainer<V, I, C, E, S>
-  where V : ViceView<I, S>, C : ViceCompositor<I, S>, E : ViceEffects {
-  public val view: V
+public interface ViceContainer<I, C, E, S>
+  where C : ViceCompositor<I, S>, E : ViceEffects {
+  public val view: ViceView<I, S>
   public val intents: SharedFlow<I>
   public val compositor: C
   public val effects: E
@@ -88,5 +88,5 @@ private inline fun <I, S> ViceUdf(
     }
   }
 
-  view.Render(state, intentHandler)
+  view(state, intentHandler)
 }

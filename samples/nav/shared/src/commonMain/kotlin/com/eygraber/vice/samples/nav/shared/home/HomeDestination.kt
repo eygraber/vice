@@ -6,8 +6,9 @@ class HomeDestination(
   onNavigateToCreateItem: () -> Unit,
   onNavigateToUpdateItem: (String) -> Unit,
   onNavigateToSettings: () -> Unit,
-) : SampleDestination<HomeView, HomeIntent, HomeCompositor, HomeViewState>() {
-  override val view = HomeView()
+) : SampleDestination<HomeIntent, HomeCompositor, HomeViewState>() {
+  override val view: HomeView = { state, onIntent -> HomeView(state, onIntent) }
+
   override val compositor = HomeCompositor(
     onNavigateToCreateItem,
     onNavigateToUpdateItem,

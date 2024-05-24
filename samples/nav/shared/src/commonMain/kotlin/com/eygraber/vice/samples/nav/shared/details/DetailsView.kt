@@ -10,17 +10,11 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.eygraber.vice.ViceView
 
-class DetailsView : ViceView<DetailsIntent, DetailsViewState> {
-  @Composable
-  override fun Render(state: DetailsViewState, onIntent: (DetailsIntent) -> Unit) {
-    DetailsView(state, onIntent)
-  }
-}
+internal typealias DetailsView = @Composable (DetailsViewState, (DetailsIntent) -> Unit) -> Unit
 
 @Composable
-private fun DetailsView(
+internal fun DetailsView(
   state: DetailsViewState,
   onIntent: (DetailsIntent) -> Unit,
 ) {

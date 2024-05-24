@@ -21,18 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.eygraber.vice.ViceView
 
-class SettingsView : ViceView<SettingsIntent, SettingsViewState> {
-  @Composable
-  override fun Render(state: SettingsViewState, onIntent: (SettingsIntent) -> Unit) {
-    Settings(state, onIntent)
-  }
-}
+internal typealias SettingsView = @Composable (SettingsViewState, (SettingsIntent) -> Unit) -> Unit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Settings(
+internal fun SettingsView(
   @Suppress("UNUSED_PARAMETER") state: SettingsViewState,
   onIntent: (SettingsIntent) -> Unit,
 ) {
@@ -76,7 +70,7 @@ private fun Settings(
 @Preview
 @Composable
 private fun SettingsPreview() {
-  Settings(
+  SettingsView(
     state = SettingsViewState,
     onIntent = {},
   )
