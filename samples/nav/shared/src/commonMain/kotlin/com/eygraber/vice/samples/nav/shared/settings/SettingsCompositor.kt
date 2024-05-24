@@ -6,7 +6,7 @@ import com.eygraber.vice.ViceCompositor
 class SettingsCompositor(
   private val onNavigateBack: () -> Unit,
   private val onNavigateToAboutUs: () -> Unit,
-) : ViceCompositor<SettingsIntent, SettingsViewState>() {
+) : ViceCompositor<SettingsIntent, SettingsViewState> {
   @Composable
   override fun composite() = SettingsViewState
 

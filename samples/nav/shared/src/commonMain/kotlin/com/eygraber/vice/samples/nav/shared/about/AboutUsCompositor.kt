@@ -5,7 +5,7 @@ import com.eygraber.vice.ViceCompositor
 
 class AboutUsCompositor(
   private val onNavigateBack: () -> Unit,
-) : ViceCompositor<AboutUsIntent, AboutUsViewState>() {
+) : ViceCompositor<AboutUsIntent, AboutUsViewState> {
   @Composable
   override fun composite() = AboutUsViewState
 

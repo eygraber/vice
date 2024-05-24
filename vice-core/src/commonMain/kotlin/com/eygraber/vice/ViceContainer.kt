@@ -17,18 +17,12 @@ public interface ViceContainer<I, C, E, S>
   public val effects: E
 
   @Composable
-  public fun OnBackPressedHandler(enabled: Boolean, onBackPressed: () -> Unit)
-
-  @Composable
   public fun Vice() {
     RunVice(
       view = view,
       intents = intents as MutableSharedFlow<I>,
       compositor = compositor,
       effects = effects,
-      onBackPressedHandler = { enabled, onBackPressed ->
-        OnBackPressedHandler(enabled, onBackPressed)
-      },
     )
   }
 }
@@ -39,21 +33,9 @@ private fun <I, S> RunVice(
   intents: MutableSharedFlow<I>,
   compositor: ViceCompositor<I, S>,
   effects: ViceEffects,
-  onBackPressedHandler: @Composable (Boolean, () -> Unit) -> Unit,
 ) {
   val scope = rememberCoroutineScope {
     Dispatchers.Main.immediate
-  }
-
-  onBackPressedHandler(compositor.internalIsBackHandlerEnabled()) {
-    compositor.internalOnBackPressed { intent ->
-      // this is synchronous because the dispatcher is Main.immediate
-      scope.launch {
-        compositor.internalOnIntent(intent)
-      }
-
-      intents.tryEmit(intent)
-    }
   }
 
   ViceUdf(
@@ -80,8 +62,9 @@ private inline fun <I, S> ViceUdf(
   val intentHandler: (I) -> Unit = remember(scope, compositor, intents) {
     { intent: I ->
       // this is synchronous because the dispatcher is Main.immediate
+      // (should be able to get rid of this once BTF2 is in Material)
       scope.launch {
-        compositor.internalOnIntent(intent)
+        compositor.onIntent(intent)
       }
 
       (intents as MutableSharedFlow<I>).tryEmit(intent)

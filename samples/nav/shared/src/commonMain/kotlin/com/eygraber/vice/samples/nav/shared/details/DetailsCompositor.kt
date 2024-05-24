@@ -12,7 +12,7 @@ import com.eygraber.vice.samples.nav.shared.TodoRepo
 class DetailsCompositor(
   op: Routes.Details,
   private val onNavigateBack: () -> Unit,
-) : ViceCompositor<DetailsIntent, DetailsViewState>() {
+) : ViceCompositor<DetailsIntent, DetailsViewState> {
   private val item = when(op) {
     Routes.Details.Create -> null
     is Routes.Details.Update -> TodoRepo.findItem(op.id)
