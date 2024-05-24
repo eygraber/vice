@@ -1,0 +1,4 @@
+potential-bugs:
+  active: true
+  MissingPackageDeclaration:
+    active: false

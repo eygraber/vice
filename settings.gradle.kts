@@ -52,6 +52,10 @@ plugins {
 
 rootProject.name = "vice"
 
+include(":samples:nav:androidApp")
+include(":samples:nav:desktopApp")
+include(":samples:nav:shared")
+include(":samples:nav:wasmJsApp")
 include(":vice-core")
 include(":vice-nav")
 include(":vice-portal")
