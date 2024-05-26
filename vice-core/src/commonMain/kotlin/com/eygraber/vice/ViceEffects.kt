@@ -6,12 +6,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-public abstract class ViceEffects {
-  internal fun initialize(scope: CoroutineScope) {
-    scope.onInitialized()
-  }
+public interface ViceEffects {
+  public fun CoroutineScope.runEffects()
 
-  protected abstract fun CoroutineScope.onInitialized()
+  public companion object {
+    public val None: ViceEffects = object : ViceEffects {
+      override fun CoroutineScope.runEffects() {}
+    }
+  }
 }
 
 @Composable
@@ -19,7 +21,7 @@ internal fun ViceEffects.Launch() {
   LaunchedEffect(Unit) {
     @Suppress("InjectDispatcher")
     launch(Dispatchers.Default) {
-      initialize(this)
+      runEffects()
     }
   }
 }
