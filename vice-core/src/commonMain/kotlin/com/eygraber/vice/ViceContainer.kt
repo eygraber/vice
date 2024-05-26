@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
-public interface ViceContainer<I, C, E, S>
-  where C : ViceCompositor<I, S>, E : ViceEffects {
-  public val view: ViceView<I, S>
-  public val intents: SharedFlow<I>
-  public val compositor: C
-  public val effects: E
+public abstract class ViceContainer<I, C, E, S>(
+  private val intents: SharedFlow<I> = MutableSharedFlow(extraBufferCapacity = 64),
+) where C : ViceCompositor<I, S>, E : ViceEffects {
+
+  public abstract val view: ViceView<I, S>
+  public abstract val compositor: C
+  public abstract val effects: E
 
   @Composable
   public fun Vice() {

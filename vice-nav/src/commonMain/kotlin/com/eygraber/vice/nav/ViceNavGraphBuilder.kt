@@ -11,17 +11,7 @@ import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
-import com.eygraber.vice.ViceCompositor
-import com.eygraber.vice.ViceContainer
-import com.eygraber.vice.ViceEffects
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlin.jvm.JvmSuppressWildcards
-
-public abstract class ViceDestination<I, C, E, S> : ViceContainer<I, C, E, S>
-  where C : ViceCompositor<I, S>, E : ViceEffects {
-  final override val intents: SharedFlow<I> = MutableSharedFlow(extraBufferCapacity = 64)
-}
 
 public inline fun NavGraphBuilder.viceComposable(
   route: String,
