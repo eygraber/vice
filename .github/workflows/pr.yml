@@ -15,7 +15,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   assemble:
-    runs-on: macos-latest
+    # Switch back to macos-latest when https://github.com/JetBrains/compose-multiplatform/issues/4777 is resolved
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -103,7 +104,8 @@ jobs:
         run: ./gradlew lintRelease
 
   test:
-    runs-on: macos-latest
+    # Switch back to macos-latest when https://github.com/JetBrains/compose-multiplatform/issues/4777 is resolved
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
