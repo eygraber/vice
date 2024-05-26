@@ -2,18 +2,17 @@ package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.eygraber.vice.ViceSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 
-public abstract class StateFlowSource<T> : ViceSource<T>, State<T> {
+public abstract class StateFlowSource<T> : ViceSource<T> {
   protected abstract val flow: StateFlow<T>
 
   protected abstract suspend fun onAttached(scope: CoroutineScope)
 
-  override val value: T get() = flow.value
+  public val value: T get() = flow.value
 
   @Composable
   final override fun currentState(): T {

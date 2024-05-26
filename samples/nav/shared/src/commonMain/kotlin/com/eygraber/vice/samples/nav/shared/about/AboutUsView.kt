@@ -17,18 +17,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.eygraber.vice.ViceView
 
-class AboutUsView : ViceView<AboutUsIntent, AboutUsViewState> {
-  @Composable
-  override fun Render(state: AboutUsViewState, onIntent: (AboutUsIntent) -> Unit) {
-    AboutUs(state, onIntent)
-  }
-}
+typealias AboutUsView = @Composable (AboutUsViewState, (AboutUsIntent) -> Unit) -> Unit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AboutUs(
+internal fun AboutUsView(
   @Suppress("UNUSED_PARAMETER") state: AboutUsViewState,
   onIntent: (AboutUsIntent) -> Unit,
 ) {
@@ -64,7 +58,7 @@ private fun AboutUs(
 @Preview
 @Composable
 private fun AboutUsPreview() {
-  AboutUs(
+  AboutUsView(
     state = AboutUsViewState,
     onIntent = {},
   )

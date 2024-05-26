@@ -9,7 +9,7 @@ class HomeCompositor(
   private val onNavigateToCreateItem: () -> Unit,
   private val onNavigateToUpdateItem: (String) -> Unit,
   private val onNavigateToSettings: () -> Unit,
-) : ViceCompositor<HomeIntent, HomeViewState>() {
+) : ViceCompositor<HomeIntent, HomeViewState> {
   @Composable
   override fun composite() = HomeViewState(
     items = TodoRepo.items.collectAsState().value,

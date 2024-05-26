@@ -4,8 +4,8 @@ import com.eygraber.vice.samples.nav.shared.SampleDestination
 
 class AboutUsDestination(
   onNavigateBack: () -> Unit,
-) : SampleDestination<AboutUsView, AboutUsIntent, AboutUsCompositor, AboutUsViewState>() {
-  override val view = AboutUsView()
+) : SampleDestination<AboutUsIntent, AboutUsCompositor, AboutUsViewState>() {
+  override val view: AboutUsView = { state, onIntent -> AboutUsView(state, onIntent) }
   override val compositor = AboutUsCompositor(
     onNavigateBack,
   )

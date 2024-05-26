@@ -27,19 +27,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.eygraber.vice.ViceView
 import com.eygraber.vice.samples.nav.shared.TodoItem
 
-class HomeView : ViceView<HomeIntent, HomeViewState> {
-  @Composable
-  override fun Render(state: HomeViewState, onIntent: (HomeIntent) -> Unit) {
-    TodoList(state, onIntent)
-  }
-}
+internal typealias HomeView = @Composable (HomeViewState, (HomeIntent) -> Unit) -> Unit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TodoList(
+internal fun HomeView(
   state: HomeViewState,
   onIntent: (HomeIntent) -> Unit,
 ) {
@@ -103,7 +97,7 @@ private fun TodoList(
 @Preview
 @Composable
 private fun TodoListPreview() {
-  TodoList(
+  HomeView(
     state = HomeViewState(
       items = listOf(
         TodoItem(
