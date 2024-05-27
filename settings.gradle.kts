@@ -31,9 +31,7 @@ pluginManagement {
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-  // comment this out for now because it doesn't work with KMP js
-  // https://youtrack.jetbrains.com/issue/KT-55620/KJS-Gradle-plugin-doesnt-support-repositoriesMode
-  // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 
   repositories {
     addCommonRepositories(
