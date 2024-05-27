@@ -16,6 +16,12 @@ kotlin {
   )
 
   sourceSets {
+    androidMain {
+      dependencies {
+        api(libs.compose.navigationAndroid)
+      }
+    }
+
     commonMain {
       dependencies {
         api(projects.viceCore)
