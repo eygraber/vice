@@ -4,15 +4,12 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SizeTransform
-import androidx.compose.runtime.remember
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
-import androidx.navigation.toRoute
+import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KType
 
 public actual inline fun <reified T : Any> NavGraphBuilder.viceComposable(
@@ -32,17 +29,8 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceComposable(
   )?,
   crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
 ) {
-  composable<T>(
-    typeMap,
-    deepLinks,
-    enterTransition,
-    exitTransition,
-    popEnterTransition,
-    popExitTransition,
-    sizeTransform,
-  ) {
-    remember(it) { destinationFactory(it.toRoute<T>()) }.Vice()
-  }
+  @Suppress("NotImplementedDeclaration")
+  TODO("Not implemented yet; waiting for CMP navigation to support type safe APIs")
 }
 
 public actual inline fun <reified T : Any> NavGraphBuilder.viceDialog(
@@ -51,11 +39,6 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceDialog(
   dialogProperties: DialogProperties,
   crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
 ) {
-  dialog<T>(
-    typeMap,
-    deepLinks,
-    dialogProperties,
-  ) {
-    remember(it) { destinationFactory(it.toRoute<T>()) }.Vice()
-  }
+  @Suppress("NotImplementedDeclaration")
+  TODO("Not implemented yet; waiting for CMP navigation to support type safe APIs")
 }
