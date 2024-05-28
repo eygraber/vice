@@ -27,7 +27,7 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     AnimatedContentTransitionScope<NavBackStackEntry>.() ->
     @JvmSuppressWildcards SizeTransform?
   )?,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 ) {
   @Suppress("NotImplementedDeclaration")
   TODO("Not implemented yet; waiting for CMP navigation to support type safe APIs")
@@ -37,7 +37,7 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceDialog(
   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>>,
   deepLinks: List<NavDeepLink>,
   dialogProperties: DialogProperties,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 ) {
   @Suppress("NotImplementedDeclaration")
   TODO("Not implemented yet; waiting for CMP navigation to support type safe APIs")
