@@ -30,7 +30,7 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     AnimatedContentTransitionScope<NavBackStackEntry>.() ->
     @JvmSuppressWildcards SizeTransform?
   )?,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 ) {
   composable<T>(
     typeMap,
@@ -41,7 +41,7 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     popExitTransition,
     sizeTransform,
   ) {
-    remember(it) { destinationFactory(it.toRoute<T>()) }.Vice()
+    remember(it) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
   }
 }
 
@@ -49,13 +49,13 @@ public actual inline fun <reified T : Any> NavGraphBuilder.viceDialog(
   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>>,
   deepLinks: List<NavDeepLink>,
   dialogProperties: DialogProperties,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 ) {
   dialog<T>(
     typeMap,
     deepLinks,
     dialogProperties,
   ) {
-    remember(it) { destinationFactory(it.toRoute<T>()) }.Vice()
+    remember(it) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
   }
 }

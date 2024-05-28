@@ -62,7 +62,7 @@ public expect inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     AnimatedContentTransitionScope<NavBackStackEntry>.() ->
     @JvmSuppressWildcards SizeTransform?
   )? = null,
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 )
 
 public fun NavGraphBuilder.viceDialog(
@@ -86,5 +86,5 @@ public expect inline fun <reified T : Any> NavGraphBuilder.viceDialog(
   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
   deepLinks: List<NavDeepLink> = emptyList(),
   dialogProperties: DialogProperties = DialogProperties(),
-  crossinline destinationFactory: (T) -> ViceDestination<*, *, *, *>,
+  crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 )
