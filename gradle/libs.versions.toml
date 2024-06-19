@@ -5,8 +5,8 @@ android-sdk-compile = "34"
 android-sdk-target = "34"
 android-sdk-min = "24"
 
-composeJetbrains = "0.0.0-integration-dev1676"
-composeLifecycle = "0.0.0-integration-dev1676"
+composeJetbrains = "1.7.0-dev1686"
+composeLifecycle = "1.7.0-dev1686"
 
 conventions = "0.0.74"
 
@@ -15,7 +15,7 @@ detektEygraber = "1.0.11"
 
 dokka = "1.9.20"
 
-kotlin = "2.0.0"
+kotlin = "2.0.10-RC-496"
 
 kotlinx-coroutines = "1.8.1"
 
@@ -25,7 +25,7 @@ publish = "0.28.0"
 
 [plugins]
 conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
-kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization" }
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
@@ -37,10 +37,11 @@ buildscript-compose-jetbrains = { module = "org.jetbrains.compose:compose-gradle
 buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+buildscript-kotlinxSerialization = { module = "org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
-compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:0.0.0-integration-dev1676"
+compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:1.7.0-dev1686"
 compose-navigationAndroid = "androidx.navigation:navigation-compose:2.8.0-beta03"
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }

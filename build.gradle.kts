@@ -11,6 +11,7 @@ buildscript {
     classpath(libs.buildscript.detekt)
     classpath(libs.buildscript.dokka)
     classpath(libs.buildscript.kotlin)
+    classpath(libs.buildscript.kotlinxSerialization)
     classpath(libs.buildscript.publish)
   }
 }
@@ -47,7 +48,7 @@ gradleConventionsDefaults {
 gradleConventionsKmpDefaults {
   targets(
     KmpTarget.Android,
-    KmpTarget.Ios,
+    // KmpTarget.Ios,
     KmpTarget.Js,
     KmpTarget.Jvm,
     KmpTarget.WasmJs,

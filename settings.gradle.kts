@@ -11,6 +11,19 @@ pluginManagement {
       }
     }
 
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev") {
+      content {
+        includeGroup("org.jetbrains.kotlin")
+        includeGroup("org.jetbrains.kotlin.plugin.serialization")
+      }
+    }
+
+    mavenLocal {
+      content {
+        includeGroupByRegex("org\\.jetbrains.*")
+      }
+    }
+
     mavenCentral()
 
     maven("https://oss.sonatype.org/content/repositories/snapshots") {
@@ -25,11 +38,11 @@ pluginManagement {
       }
     }
 
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
-      content {
-        includeGroupByRegex("org\\.jetbrains.*")
-      }
-    }
+    // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
+    //   content {
+    //     includeGroupByRegex("org\\.jetbrains.*")
+    //   }
+    // }
 
     gradlePluginPortal()
   }
@@ -42,6 +55,16 @@ dependencyResolutionManagement {
   // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
   repositories {
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev") {
+      content {
+        includeGroup("org.jetbrains.kotlin")
+      }
+    }
+    mavenLocal {
+      content {
+        includeGroupByRegex("org\\.jetbrains.*")
+      }
+    }
     addCommonRepositories(
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
