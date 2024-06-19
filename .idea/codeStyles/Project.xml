@@ -12,13 +12,6 @@
     </JavaCodeStyleSettings>
     <JetCodeStyleSettings>
       <option name="SPACE_BEFORE_WHEN_PARENTHESES" value="false" />
-      <option name="CONTINUATION_INDENT_IN_PARAMETER_LISTS" value="false" />
-      <option name="CONTINUATION_INDENT_IN_ARGUMENT_LISTS" value="false" />
-      <option name="CONTINUATION_INDENT_FOR_EXPRESSION_BODIES" value="false" />
-      <option name="CONTINUATION_INDENT_FOR_CHAINED_CALLS" value="false" />
-      <option name="CONTINUATION_INDENT_IN_SUPERTYPE_LISTS" value="false" />
-      <option name="CONTINUATION_INDENT_IN_IF_CONDITIONS" value="false" />
-      <option name="CONTINUATION_INDENT_IN_ELVIS" value="false" />
     </JetCodeStyleSettings>
     <editorconfig>
       <option name="ENABLED" value="false" />
@@ -1329,9 +1322,6 @@
       <option name="SPACE_BEFORE_FOR_PARENTHESES" value="false" />
       <option name="SPACE_BEFORE_CATCH_PARENTHESES" value="false" />
       <option name="METHOD_PARAMETERS_WRAP" value="1" />
-      <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
-      <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
-      <option name="ASSIGNMENT_WRAP" value="1" />
       <option name="METHOD_ANNOTATION_WRAP" value="1" />
       <option name="FIELD_ANNOTATION_WRAP" value="1" />
       <indentOptions>

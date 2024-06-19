@@ -25,6 +25,12 @@ pluginManagement {
       }
     }
 
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
+      content {
+        includeGroupByRegex("org\\.jetbrains.*")
+      }
+    }
+
     gradlePluginPortal()
   }
 }
@@ -40,7 +46,7 @@ dependencyResolutionManagement {
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
       includeGoogle = true,
-      includeJetbrainsComposeDev = false,
+      includeJetbrainsComposeDev = true,
     )
   }
 }
