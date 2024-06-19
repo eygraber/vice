@@ -1,10 +1,20 @@
+@file:OptIn(ExperimentalSharedTransitionApi::class)
+
 package com.eygraber.vice.nav
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.SizeTransform
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
@@ -16,6 +26,63 @@ import androidx.navigation.compose.dialog
 import androidx.navigation.toRoute
 import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KType
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+public data class SharedTransitionScopes(
+  val shared: SharedTransitionScope?,
+  val animated: AnimatedContentScope?
+) {
+  public companion object {
+    public val Default: SharedTransitionScopes = SharedTransitionScopes(null, null)
+  }
+}
+
+public val LocalSharedTransitionScopes: ProvidableCompositionLocal<SharedTransitionScopes> =
+  compositionLocalOf { SharedTransitionScopes.Default }
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+public fun Modifier.virtueSharedBounds(
+  key: Any,
+): Modifier = then(
+  LocalSharedTransitionScopes.current.run {
+    val shared = shared
+    val animated = animated
+    if(shared != null && animated != null) {
+      with(shared) {
+        Modifier.sharedBounds(
+          rememberSharedContentState(key),
+          animated
+        )
+      }
+    }
+    else {
+      Modifier
+    }
+  }
+)
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+public fun Modifier.virtueSharedElement(
+  key: Any,
+): Modifier = then(
+  LocalSharedTransitionScopes.current.run {
+    val shared = shared
+    val animated = animated
+    if(shared != null && animated != null) {
+      with(shared) {
+        Modifier.sharedElement(
+          rememberSharedContentState(key),
+          animated
+        )
+      }
+    }
+    else {
+      Modifier
+    }
+  }
+)
 
 public inline fun NavGraphBuilder.viceComposable(
   route: String,
@@ -42,7 +109,14 @@ public inline fun NavGraphBuilder.viceComposable(
     popEnterTransition = popEnterTransition,
     popExitTransition = popExitTransition,
   ) {
-    remember(it.id) { destinationFactory(it) }.Vice()
+    CompositionLocalProvider(
+      LocalSharedTransitionScopes provides SharedTransitionScopes(
+        shared = LocalSharedTransitionScopes.current.shared,
+        animated = this
+      )
+    ) {
+      remember(it.id) { destinationFactory(it) }.Vice()
+    }
   }
 }
 
@@ -60,8 +134,8 @@ public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
   (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? =
     exitTransition,
   noinline sizeTransform: (
-    AnimatedContentTransitionScope<NavBackStackEntry>.() ->
-    @JvmSuppressWildcards SizeTransform?
+  AnimatedContentTransitionScope<NavBackStackEntry>.() ->
+  @JvmSuppressWildcards SizeTransform?
   )? = null,
   crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
 ) {
@@ -74,7 +148,14 @@ public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     popExitTransition = popExitTransition,
     sizeTransform = sizeTransform,
   ) {
-    remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
+    CompositionLocalProvider(
+      LocalSharedTransitionScopes provides SharedTransitionScopes(
+        shared = LocalSharedTransitionScopes.current.shared,
+        animated = this
+      )
+    ) {
+      remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
+    }
   }
 }
 
