@@ -54,4 +54,4 @@ kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
-portalCompose = "com.eygraber:portal-compose:0.9.30"
+portalCompose = "com.eygraber:portal-compose:0.9.31"
