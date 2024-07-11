@@ -1,10 +1,8 @@
 package com.eygraber.vice.samples.nav.shared
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.eygraber.vice.nav.viceComposable
 import com.eygraber.vice.nav.viceDialog
@@ -19,53 +17,41 @@ fun App() {
 
   NavHost(
     navController = navController,
-    startDestination = "/todo",
+    startDestination = Routes.Home,
   ) {
-    viceComposable(
-      route = "/todo",
-    ) {
+    viceComposable<Routes.Home> {
       HomeDestination(
-        onNavigateToCreateItem = { navController.navigate("/todo/create") },
-        onNavigateToUpdateItem = { id -> navController.navigate("/todo/update/$id") },
-        onNavigateToSettings = { navController.navigate("/settings") },
+        onNavigateToCreateItem = { navController.navigate(Routes.Details.Create) },
+        onNavigateToUpdateItem = { id -> navController.navigate(Routes.Details.Update(id)) },
+        onNavigateToSettings = { navController.navigate(Routes.Settings) },
       )
     }
 
-    viceDialog(
-      route = "/todo/create",
-    ) {
+    viceDialog<Routes.Details.Create> {
       DetailsDestination(
         op = Routes.Details.Create,
         onNavigateBack = { navController.popBackStack() },
       )
     }
 
-    viceDialog(
-      route = "/todo/update/{id}",
-      arguments = listOf(
-        navArgument("id") { type = NavType.StringType },
-      ),
-    ) { op ->
+    viceDialog<Routes.Details.Update> { entry ->
       DetailsDestination(
         op = Routes.Details.Update(
-          id = requireNotNull(op.arguments?.getString("id")),
+          id = requireNotNull(entry.route.id),
         ),
         onNavigateBack = { navController.popBackStack() },
       )
     }
 
-    navigation(
-      route = "/settings-home",
-      startDestination = "/settings",
+    navigation<Routes.Settings>(
+      startDestination = Routes.Settings.Home,
     ) {
-      viceComposable(
-        route = "/settings",
-      ) {
+      viceComposable<Routes.Settings.Home> {
         SettingsDestination(
           onNavigateBack = { navController.popBackStack() },
           onNavigateToAboutUs = {
-            navController.navigate("/settings/about-us") {
-              popUpTo("/settings") {
+            navController.navigate(Routes.Settings.AboutUs) {
+              popUpTo(Routes.Settings.Home) {
                 inclusive = true
                 saveState = true
               }
@@ -74,9 +60,7 @@ fun App() {
         )
       }
 
-      viceComposable(
-        route = "/settings/about-us",
-      ) {
+      viceComposable<Routes.Settings.AboutUs> {
         AboutUsDestination(
           onNavigateBack = { navController.popBackStack() },
         )

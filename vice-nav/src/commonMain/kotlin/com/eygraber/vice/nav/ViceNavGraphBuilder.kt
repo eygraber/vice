@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SizeTransform
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NamedNavArgument
@@ -13,6 +14,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
+import androidx.navigation.toRoute
 import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KType
 
@@ -33,19 +35,23 @@ public inline fun NavGraphBuilder.viceComposable(
   crossinline destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *>,
 ) {
   composable(
-    route,
-    arguments,
-    deepLinks,
-    enterTransition,
-    exitTransition,
-    popEnterTransition,
-    popExitTransition,
+    route = route,
+    arguments = arguments,
+    deepLinks = deepLinks,
+    enterTransition = enterTransition,
+    exitTransition = exitTransition,
+    popEnterTransition = popEnterTransition,
+    popExitTransition = popExitTransition,
   ) {
-    remember(it) { destinationFactory(it) }.Vice()
+    CompositionLocalProvider(
+      LocalAnimatedVisibilityScope provides this,
+    ) {
+      remember(it.id) { destinationFactory(it) }.Vice()
+    }
   }
 }
 
-public expect inline fun <reified T : Any> NavGraphBuilder.viceComposable(
+public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
   deepLinks: List<NavDeepLink> = emptyList(),
   noinline enterTransition:
@@ -63,7 +69,23 @@ public expect inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     @JvmSuppressWildcards SizeTransform?
   )? = null,
   crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
-)
+) {
+  composable<T>(
+    typeMap = typeMap,
+    deepLinks = deepLinks,
+    enterTransition = enterTransition,
+    exitTransition = exitTransition,
+    popEnterTransition = popEnterTransition,
+    popExitTransition = popExitTransition,
+    sizeTransform = sizeTransform,
+  ) {
+    CompositionLocalProvider(
+      LocalAnimatedVisibilityScope provides this,
+    ) {
+      remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
+    }
+  }
+}
 
 public fun NavGraphBuilder.viceDialog(
   route: String,
@@ -73,18 +95,26 @@ public fun NavGraphBuilder.viceDialog(
   destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *>,
 ) {
   dialog(
-    route,
-    arguments,
-    deepLinks,
-    dialogProperties,
+    route = route,
+    arguments = arguments,
+    deepLinks = deepLinks,
+    dialogProperties = dialogProperties,
   ) {
-    remember(it) { destinationFactory(it) }.Vice()
+    remember(it.id) { destinationFactory(it) }.Vice()
   }
 }
 
-public expect inline fun <reified T : Any> NavGraphBuilder.viceDialog(
+public inline fun <reified T : Any> NavGraphBuilder.viceDialog(
   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
   deepLinks: List<NavDeepLink> = emptyList(),
   dialogProperties: DialogProperties = DialogProperties(),
   crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
-)
+) {
+  dialog<T>(
+    typeMap = typeMap,
+    deepLinks = deepLinks,
+    dialogProperties = dialogProperties,
+  ) {
+    remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
+  }
+}
