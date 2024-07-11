@@ -18,6 +18,7 @@ import androidx.compose.animation.core.VisibilityThreshold
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Alignment.Companion.Center
@@ -34,10 +35,11 @@ public val LocalSharedTransitionScope: ProvidableCompositionLocal<SharedTransiti
 public val LocalAnimatedVisibilityScope: ProvidableCompositionLocal<AnimatedVisibilityScope> =
   compositionLocalOf { error("LocalAnimatedVisibilityScope not provided") }
 
+@Composable
 public fun Modifier.sharedElement(
-  sharedTransitionScope: SharedTransitionScope,
-  animatedVisibilityScope: AnimatedVisibilityScope,
-  state: SharedContentState,
+  sharedTransitionScope: SharedTransitionScope = LocalSharedTransitionScope.current,
+  animatedVisibilityScope: AnimatedVisibilityScope = LocalAnimatedVisibilityScope.current,
+  state: Any,
   boundsTransform: BoundsTransform = DefaultBoundsTransform,
   placeHolderSize: SharedTransitionScope.PlaceHolderSize = contentSize,
   renderInOverlayDuringTransition: Boolean = true,
@@ -45,7 +47,7 @@ public fun Modifier.sharedElement(
   clipInOverlayDuringTransition: OverlayClip = ParentClip,
 ): Modifier = with(sharedTransitionScope) {
   this@sharedElement.sharedElement(
-    state = state,
+    state = sharedTransitionScope.rememberSharedContentState(state),
     animatedVisibilityScope = animatedVisibilityScope,
     boundsTransform = boundsTransform,
     placeHolderSize = placeHolderSize,
@@ -55,12 +57,13 @@ public fun Modifier.sharedElement(
   )
 }
 
+@Composable
 public fun Modifier.sharedBounds(
-  sharedTransitionScope: SharedTransitionScope,
-  animatedVisibilityScope: AnimatedVisibilityScope,
+  sharedTransitionScope: SharedTransitionScope = LocalSharedTransitionScope.current,
+  animatedVisibilityScope: AnimatedVisibilityScope = LocalAnimatedVisibilityScope.current,
   enter: EnterTransition = fadeIn(),
   exit: ExitTransition = fadeOut(),
-  sharedContentState: SharedContentState,
+  sharedContentState: Any,
   boundsTransform: BoundsTransform = DefaultBoundsTransform,
   resizeMode: ResizeMode = ScaleToBounds(ContentScale.FillWidth, Center),
   placeHolderSize: SharedTransitionScope.PlaceHolderSize = contentSize,
@@ -69,7 +72,7 @@ public fun Modifier.sharedBounds(
   clipInOverlayDuringTransition: OverlayClip = ParentClip,
 ): Modifier = with(sharedTransitionScope) {
   this@sharedBounds.sharedBounds(
-    sharedContentState = sharedContentState,
+    sharedContentState = sharedTransitionScope.rememberSharedContentState(sharedContentState),
     animatedVisibilityScope = animatedVisibilityScope,
     enter = enter,
     exit = exit,
