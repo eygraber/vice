@@ -1,8 +1,11 @@
 package com.eygraber.vice
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.eygraber.vice.filter.ThrottlingIntentFilter
+import com.eygraber.vice.filter.ViceIntentFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -10,8 +13,10 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
 public abstract class ViceContainer<I, C, E, S>(
+  vararg intentFilters: ViceIntentFilter = arrayOf(ThrottlingIntentFilter()),
   private val intents: SharedFlow<I> = MutableSharedFlow(extraBufferCapacity = 64),
-) where C : ViceCompositor<I, S>, E : ViceEffects {
+) where C : ViceCompositor<I, S>, I : Any, E : ViceEffects, S : Any {
+  private val intentFilters = intentFilters.toList()
 
   public abstract val view: ViceView<I, S>
   public abstract val compositor: C
@@ -20,57 +25,60 @@ public abstract class ViceContainer<I, C, E, S>(
   @Composable
   public fun Vice() {
     RunVice(
-      view = view,
-      intents = intents as MutableSharedFlow<I>,
-      compositor = compositor,
-      effects = effects,
+      ViceArgs(
+        view = view,
+        intents = intents as MutableSharedFlow<I>,
+        compositor = compositor,
+        intentFilters = intentFilters,
+        effects = effects,
+      ),
     )
   }
 }
 
+@Stable
+private data class ViceArgs<I : Any, S : Any>(
+  val view: ViceView<I, S>,
+  val intents: MutableSharedFlow<I>,
+  val compositor: ViceCompositor<I, S>,
+  val intentFilters: List<ViceIntentFilter>,
+  val effects: ViceEffects,
+  val scope: CoroutineScope? = null,
+)
+
 @Composable
-private fun <I, S> RunVice(
-  view: ViceView<I, S>,
-  intents: MutableSharedFlow<I>,
-  compositor: ViceCompositor<I, S>,
-  effects: ViceEffects,
+private fun <I : Any, S : Any> RunVice(
+  args: ViceArgs<I, S>,
 ) {
   val scope = rememberCoroutineScope {
     Dispatchers.Main.immediate
   }
 
   ViceUdf(
-    view,
-    intents,
-    compositor,
-    effects,
-    scope,
+    args.copy(scope = scope),
   )
 }
 
-@Suppress("NOTHING_TO_INLINE")
 @Composable
-private inline fun <I, S> ViceUdf(
-  view: ViceView<I, S>,
-  intents: SharedFlow<I>,
-  compositor: ViceCompositor<I, S>,
-  effects: ViceEffects,
-  scope: CoroutineScope,
+private fun <I : Any, S : Any> ViceUdf(
+  args: ViceArgs<I, S>,
 ) {
-  effects.Launch()
+  args.effects.Launch()
 
-  val state = compositor.composite()
-  val intentHandler: (I) -> Unit = remember(scope, compositor, intents) {
+  val state = args.compositor.composite()
+  val intentHandler: (I) -> Unit = remember(args.intentFilters, args.scope, args.compositor, args.intents) {
     { intent: I ->
-      // this is synchronous because the dispatcher is Main.immediate
-      // (should be able to get rid of this once BTF2 is in Material)
-      scope.launch {
-        compositor.onIntent(intent)
-      }
+      if(args.intentFilters.all { it.filter(intent) }) {
+        // this is synchronous because the dispatcher is Main.immediate
+        // (should be able to get rid of this once BTF2 is in Material)
+        args.scope?.launch {
+          args.compositor.onIntent(intent)
+        }
 
-      (intents as MutableSharedFlow<I>).tryEmit(intent)
+        args.intents.tryEmit(intent)
+      }
     }
   }
 
-  view(state, intentHandler)
+  args.view(state, intentHandler)
 }
