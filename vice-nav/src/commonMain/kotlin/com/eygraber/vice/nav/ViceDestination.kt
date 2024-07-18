@@ -5,4 +5,4 @@ import com.eygraber.vice.ViceContainer
 import com.eygraber.vice.ViceEffects
 
 public abstract class ViceDestination<I, C, E, S> : ViceContainer<I, C, E, S>()
-  where C : ViceCompositor<I, S>, E : ViceEffects
+  where C : ViceCompositor<I, S>, I : Any, E : ViceEffects, S : Any
