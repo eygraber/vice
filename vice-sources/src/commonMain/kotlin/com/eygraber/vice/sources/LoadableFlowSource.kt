@@ -1,7 +1,6 @@
 package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Stable
-import com.eygraber.vice.epochMillis
 import com.eygraber.vice.loadable.ViceLoadable
 import com.eygraber.vice.loadable.isLoading
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +8,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.TimeSource
 
 @Stable
 public abstract class LoadableFlowSource<T> : StateFlowSource<ViceLoadable<T>>() {
@@ -22,16 +25,16 @@ public abstract class LoadableFlowSource<T> : StateFlowSource<ViceLoadable<T>>()
 
   protected abstract val placeholder: T
 
-  protected open val initialLoadingThresholdMillis: Int = 200
-  protected open val minLoadingDurationMillis: Long = 1_000L
+  protected open val initialLoadingThreshold: Duration = 200.milliseconds
+  protected open val minLoadingDuration: Duration = 1.seconds
 
   override suspend fun onAttached(scope: CoroutineScope) {
-    val initialLoadingThreshold = epochMillis() + initialLoadingThresholdMillis
-    val minLoadingThreshold = initialLoadingThreshold + minLoadingDurationMillis
+    val initialLoadingThreshold = TimeSource.Monotonic.markNow() + initialLoadingThreshold
+    val minLoadingThreshold = initialLoadingThreshold + minLoadingDuration
 
     dataFlow.collect { value ->
       if(flow.value.isLoading) {
-        val now = epochMillis()
+        val now = TimeSource.Monotonic.markNow()
         if(now in initialLoadingThreshold..<minLoadingThreshold) {
           delay(minLoadingThreshold - now)
         }
