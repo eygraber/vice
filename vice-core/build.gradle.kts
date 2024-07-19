@@ -1,3 +1,5 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
+
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
   id("com.eygraber.conventions-android-library")
@@ -33,6 +35,17 @@ kotlin {
     commonTest {
       dependencies {
         implementation(kotlin("test"))
+      }
+    }
+
+    jvmTest {
+      dependencies {
+        implementation(compose.desktop.currentOs)
+
+        implementation(compose.foundation)
+
+        @OptIn(ExperimentalComposeLibrary::class)
+        implementation(compose.uiTest)
       }
     }
 

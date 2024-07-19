@@ -31,9 +31,44 @@ class ThrottlingIntentFilterTest {
   }
 
   @Test
+  fun filter_throttlesThrottlingIntentsWithTheSameKey_usingTheDefaultKey_butDoesNotThrottleAThrottlingIntentWithADifferentKey() {
+    val filter = ThrottlingIntentFilter()
+    assertTrue { filter.filter(DefaultThrottlingIntent()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent()) }
+    assertTrue { filter.filter(DefaultThrottlingIntent2()) }
+  }
+
+  @Test
+  fun filter_throttlesThrottlingIntentsWithTheSameKey_usingTheDefaultKey_andAlsoThrottlesMultipleThrottlingIntentsWithADifferentKey() {
+    val filter = ThrottlingIntentFilter()
+    assertTrue { filter.filter(DefaultThrottlingIntent()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent()) }
+    assertTrue { filter.filter(DefaultThrottlingIntent2()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent2()) }
+  }
+
+  @Test
+  fun filter_throttlesMultipleThrottlingIntentsWithTheSameKey_usingTheDefaultKey() {
+    val filter = ThrottlingIntentFilter()
+    assertTrue { filter.filter(DefaultThrottlingIntent()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent()) }
+    assertFalse { filter.filter(DefaultThrottlingIntent()) }
+  }
+
+  @Test
   fun filter_throttlesThrottlingIntentsWithTheSameKey_usingACustomKey() {
     val filter = ThrottlingIntentFilter()
     assertTrue { filter.filter(CustomKeyThrottlingIntent(1)) }
+    assertFalse { filter.filter(CustomKeyThrottlingIntent(1)) }
+  }
+
+  @Test
+  fun filter_throttlesMultipleThrottlingIntentsWithTheSameKey_usingACustomKey() {
+    val filter = ThrottlingIntentFilter()
+    assertTrue { filter.filter(CustomKeyThrottlingIntent(1)) }
+    assertFalse { filter.filter(CustomKeyThrottlingIntent(1)) }
+    assertFalse { filter.filter(CustomKeyThrottlingIntent(1)) }
     assertFalse { filter.filter(CustomKeyThrottlingIntent(1)) }
   }
 
@@ -83,7 +118,7 @@ class ThrottlingIntentFilterTest {
   }
 
   @Test
-  fun filter_doesNotThrottleThrottlingIntentsWithTheSameKey_afterTheIntervalHasPassedTwice() {
+  fun filter_doesNotThrottleASecondThrottlingIntentWithTheSameKey_afterTheIntervalHasPassedAgain() {
     val testTimeSource = TestTimeSource()
     val filter = ThrottlingIntentFilter(
       timeSource = testTimeSource,

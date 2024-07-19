@@ -45,6 +45,11 @@ gradleConventionsDefaults {
 }
 
 gradleConventionsKmpDefaults {
+  webOptions = webOptions.copy(
+    isBrowserEnabled = true,
+    isNodeEnabled = false,
+  )
+
   targets(
     KmpTarget.Android,
     // re-enable when https://github.com/JetBrains/compose-multiplatform/issues/4777 is fixed
