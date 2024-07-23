@@ -17,6 +17,10 @@ import com.eygraber.vice.ViceContainer
 import com.eygraber.vice.ViceEffects
 import com.eygraber.vice.ViceView
 import com.eygraber.vice.filter.ThrottlingIntentUiTest.Intent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.time.Duration.Companion.milliseconds
@@ -26,8 +30,8 @@ import kotlin.time.TestTimeSource
 class ThrottlingIntentUiTest {
   sealed interface Intent {
     data object Regular : Intent
-    object DefaultThrottlingIntent : ThrottlingIntent, Intent
-    object DefaultThrottlingIntent2 : ThrottlingIntent, Intent
+    data object DefaultThrottlingIntent : ThrottlingIntent, Intent
+    data object DefaultThrottlingIntent2 : ThrottlingIntent, Intent
     data class CustomKeyThrottlingIntent(private val i: Int) : ThrottlingIntent, Intent {
       override fun key() = i
     }
@@ -47,13 +51,13 @@ class ThrottlingIntentUiTest {
       with(onNodeWithTag("subject")) {
         assertExists()
 
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.Regular),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.Regular, Intent.Regular),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -71,9 +75,9 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -91,13 +95,13 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -121,17 +125,17 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent2),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -155,21 +159,21 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent2),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent2),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -187,21 +191,21 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -219,13 +223,13 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -243,21 +247,21 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -281,13 +285,13 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent2),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -307,13 +311,13 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(0)),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.CustomKeyThrottlingIntent(0), Intent.CustomKeyThrottlingIntent(1)),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -335,19 +339,19 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += Intent.DefaultThrottlingIntent.interval
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += 1.milliseconds
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -369,23 +373,23 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += Intent.DefaultThrottlingIntent.interval
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += 1.milliseconds
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
       }
     }
@@ -407,47 +411,54 @@ class ThrottlingIntentUiTest {
 
       with(onNodeWithTag("subject")) {
         assertExists()
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += Intent.DefaultThrottlingIntent.interval
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += 1.milliseconds
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += Intent.DefaultThrottlingIntent.interval
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(Intent.DefaultThrottlingIntent, Intent.DefaultThrottlingIntent),
-          actual = container.intents,
+          container = container,
         )
         testTimeSource += 1.milliseconds
-        performClickAndAssertContentEquals(
+        performClickAndAssertIntentsEquals(
           expected = listOf(
             Intent.DefaultThrottlingIntent,
             Intent.DefaultThrottlingIntent,
             Intent.DefaultThrottlingIntent,
           ),
-          actual = container.intents,
+          container = container,
         )
       }
     }
 
-  private fun SemanticsNodeInteraction.performClickAndAssertContentEquals(
+  private fun SemanticsNodeInteraction.performClickAndAssertIntentsEquals(
     expected: List<Intent>,
-    actual: List<Intent>,
+    container: TestContainer,
   ) {
-    performClick()
-    assertContentEquals(
-      expected = expected,
-      actual = actual,
-      message = "Expected $expected; actual $actual",
-    )
+    runBlocking(Dispatchers.Main.immediate) {
+      container.lock.lock()
+
+      performClick()
+
+      container.lock.withLock {
+        assertContentEquals(
+          expected = expected,
+          actual = container.intents,
+          message = "Expected $expected; actual ${container.intents}",
+        )
+      }
+    }
   }
 }
 
@@ -463,9 +474,12 @@ private abstract class TestContainer(
         .testTag("subject")
         .clickable {
           onIntent(intentProvider())
+          lock.unlock()
         },
     )
   }
+
+  val lock = Mutex()
 
   val intents = ArrayList<Intent>()
 
