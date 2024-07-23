@@ -15,7 +15,7 @@ detektEygraber = "1.0.11"
 
 dokka = "1.9.20"
 
-kotlin = "2.0.10-RC-526"
+kotlin = "2.0.10-RC2"
 
 kotlinx-coroutines = "1.8.1"
 
