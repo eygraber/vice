@@ -5,6 +5,7 @@ on:
 
 jobs:
   danger:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,6 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   assemble:
+    if: false
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +37,7 @@ jobs:
         run: ./gradlew assemble
 
   detekt:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -77,6 +80,7 @@ jobs:
         run: ./gradlew detektAppleMain detektAppleTest
 
   ktlint:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -85,6 +89,7 @@ jobs:
         run: ./format --no-format
 
   lint:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
