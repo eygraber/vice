@@ -122,15 +122,8 @@ jobs:
           gradle-home-cache-cleanup: true
           validate-wrappers: true
 
-      - name: Setup Xvfb
-        timeout-minutes: 3
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb x11-xserver-utils
-
       - name: Run tests
-        timeout-minutes: 10
-        run: xvfb-run --auto-servernum ./gradlew allTests
+        run: ./gradlew allTests
 
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx16g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
