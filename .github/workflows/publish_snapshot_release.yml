@@ -20,9 +20,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
           dependency-graph: generate-and-submit
-          validate-wrappers: true
 
       - name: Publish the artifacts
         env:
