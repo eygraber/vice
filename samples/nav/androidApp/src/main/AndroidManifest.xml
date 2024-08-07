@@ -11,6 +11,7 @@
     <activity
       android:name="com.eygraber.vice.samples.nav.android.SampleNavActivity"
       android:resizeableActivity="true"
+      android:label="VICE Nav"
       android:launchMode="singleInstance"
       android:configChanges="colorMode|density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
       android:exported="true">
