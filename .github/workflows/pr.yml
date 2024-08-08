@@ -51,8 +51,6 @@ jobs:
         run: ./gradlew detektAll
 
   detekt-apple:
-    # re-enable when https://github.com/JetBrains/compose-multiplatform/issues/4777 is fixed
-    if: false
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -97,8 +95,7 @@ jobs:
         run: ./gradlew lintRelease
 
   test:
-    # Switch back to macos-latest when https://github.com/JetBrains/compose-multiplatform/issues/4777 is resolved
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
