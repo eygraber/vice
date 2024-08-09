@@ -52,8 +52,7 @@ gradleConventionsKmpDefaults {
 
   targets(
     KmpTarget.Android,
-    // re-enable when https://github.com/JetBrains/compose-multiplatform/issues/4777 is fixed
-    // KmpTarget.Ios,
+    KmpTarget.Ios,
     KmpTarget.Js,
     KmpTarget.Jvm,
     KmpTarget.WasmJs,
