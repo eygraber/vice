@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.eygraber:vice-core:0.0.4")
+  implementation("com.eygraber:vice-core:0.0.5")
 }
 ```
 
