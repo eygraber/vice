@@ -8,7 +8,7 @@ android-sdk-min = "24"
 composeJetbrains = "1.7.0-alpha03"
 composeLifecycle = "2.8.0"
 
-conventions = "0.0.76"
+conventions = "0.0.77"
 
 detekt = "1.23.6"
 detektEygraber = "1.0.11"
