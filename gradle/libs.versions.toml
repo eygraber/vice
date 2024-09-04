@@ -41,7 +41,7 @@ buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", v
 
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
 compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09"
-compose-navigationAndroid = "androidx.navigation:navigation-compose:2.8.0-rc01"
+compose-navigationAndroid = "androidx.navigation:navigation-compose:2.8.0"
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
