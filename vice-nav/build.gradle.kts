@@ -16,29 +16,24 @@ kotlin {
   )
 
   sourceSets {
-    androidMain {
-      dependencies {
-        api(libs.compose.navigationAndroid)
-      }
+    androidMain.dependencies {
+      api(libs.compose.navigationAndroid)
     }
 
-    commonMain {
-      dependencies {
-        api(projects.viceCore)
+    commonMain.dependencies {
+      api(projects.viceCore)
 
-        implementation(compose.runtime)
+      api(libs.compose.navigation)
+      api(libs.compose.navigationMaterial)
 
-        implementation(libs.kotlinx.coroutines.core)
+      implementation(compose.runtime)
 
-        api(libs.compose.navigation)
-      }
+      implementation(libs.kotlinx.coroutines.core)
     }
 
-    commonTest {
-      dependencies {
-        implementation(kotlin("test-common"))
-        implementation(kotlin("test-annotations-common"))
-      }
+    commonTest.dependencies {
+      implementation(kotlin("test-common"))
+      implementation(kotlin("test-annotations-common"))
     }
   }
 }
