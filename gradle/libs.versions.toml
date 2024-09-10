@@ -40,7 +40,7 @@ buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ver
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
-compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha09"
+compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10"
 compose-navigationAndroid = "androidx.navigation:navigation-compose:2.8.0"
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
