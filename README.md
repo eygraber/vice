@@ -369,8 +369,8 @@ class WelcomeScreenEffects(
 Let's take a look at a simple example:
 
 ```kotlin
-sealed interface GreetingIntent : ThrottlingIntent {
-  data object SaidHello : GreetingIntent
+sealed interface GreetingIntent {
+  data object SaidHello : GreetingIntent, ThrottlingIntent
 }
 
 @Immutable
