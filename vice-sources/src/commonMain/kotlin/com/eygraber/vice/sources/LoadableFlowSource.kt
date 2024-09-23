@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -28,11 +29,13 @@ public abstract class LoadableFlowSource<T> : StateFlowSource<ViceLoadable<T>>()
   protected open val initialLoadingThreshold: Duration = 200.milliseconds
   protected open val minLoadingDuration: Duration = 1.seconds
 
+  protected open val isBufferingEmissionsWhileLoading: Boolean = false
+
   override suspend fun onAttached(scope: CoroutineScope) {
     val initialLoadingThreshold = TimeSource.Monotonic.markNow() + initialLoadingThreshold
     val minLoadingThreshold = initialLoadingThreshold + minLoadingDuration
 
-    dataFlow.collect { value ->
+    val collector: suspend (T) -> Unit = { value ->
       if(flow.value.isLoading) {
         val now = TimeSource.Monotonic.markNow()
         if(now in initialLoadingThreshold..<minLoadingThreshold) {
@@ -41,6 +44,11 @@ public abstract class LoadableFlowSource<T> : StateFlowSource<ViceLoadable<T>>()
       }
 
       mutableFlow.value = ViceLoadable.Loaded(value)
+    }
+
+    when {
+      isBufferingEmissionsWhileLoading -> dataFlow.collect(collector)
+      else -> dataFlow.collectLatest(collector)
     }
   }
 }
