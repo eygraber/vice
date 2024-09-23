@@ -119,7 +119,8 @@ jobs:
         id: prepare_next_dev
         run: |
           sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties && \
-            sed -i -E -e 's/vice-core(:|\/)[0-9]+\.[0-9]+\.[0-9]+/vice-core\1${{ env.RELEASE_VERSION }}/g' README.md
+            sed -i -E -e 's/vice-core(:|\/)[0-9]+\.[0-9]+\.[0-9]+/vice-core\1${{ env.RELEASE_VERSION }}/g' README.md && \
+            sed -i -E -e 's/vice-nav(:|\/)[0-9]+\.[0-9]+\.[0-9]+/vice-nav\1${{ env.RELEASE_VERSION }}/g' README.md
 
       - name: Commit next dev version
         id: commit_next_dev
