@@ -15,8 +15,8 @@
       ]
     },
     {
-      "groupName": "gradle-enterprise-plugin",
-      "matchPackagePrefixes": ["com.gradle.enterprise"],
+      "groupName": "gradle-develocity-plugin",
+      "matchPackagePrefixes": ["com.gradle.develocity"],
       "automerge": true,
       "registryUrls": [
         "https://plugins.gradle.org/m2"
