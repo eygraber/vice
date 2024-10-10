@@ -11,11 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlin.experimental.ExperimentalObjCRefinement
-import kotlin.native.HiddenFromObjC
 
-@OptIn(ExperimentalObjCRefinement::class)
-@HiddenFromObjC
 public abstract class ViceContainer<I, C, E, S>(
   vararg intentFilters: ViceIntentFilter = arrayOf(ThrottlingIntentFilter()),
   private val intents: SharedFlow<I> = MutableSharedFlow(extraBufferCapacity = 64),
