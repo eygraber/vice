@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
 public val LocalSharedTransitionScope: ProvidableCompositionLocal<SharedTransitionScope> =
-  compositionLocalOf { error("LocalAnimatedVisibilityScope not provided") }
+  compositionLocalOf { error("LocalSharedTransitionScope not provided") }
 
 public val LocalAnimatedVisibilityScope: ProvidableCompositionLocal<AnimatedVisibilityScope> =
   compositionLocalOf { error("LocalAnimatedVisibilityScope not provided") }
