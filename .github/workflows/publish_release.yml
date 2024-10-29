@@ -59,6 +59,11 @@ jobs:
           version-file: ${{ env.VERSION_FILE }}
           version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version-file: .ci-java-version
+
       - name: Create, checkout, and push release branch
         run: |
           git config user.name eygraber
