@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SizeTransform
-import androidx.compose.material.navigation.bottomSheet
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.window.DialogProperties
@@ -119,32 +118,3 @@ public inline fun <reified T : Any> NavGraphBuilder.viceDialog(
     remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
   }
 }
-
-public fun NavGraphBuilder.viceBottomSheet(
-  route: String,
-  arguments: List<NamedNavArgument> = emptyList(),
-  deepLinks: List<NavDeepLink> = emptyList(),
-  destinationFactory: (NavBackStackEntry) -> ViceDestination<*, *, *, *>,
-) {
-  bottomSheet(
-    route = route,
-    arguments = arguments,
-    deepLinks = deepLinks,
-  ) {
-    remember(it.id) { destinationFactory(it) }.Vice()
-  }
-}
-
-// TODO: Only available starting Compose 1.8.0
-// public inline fun <reified T : Any> NavGraphBuilder.viceBottomSheet(
-//   typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
-//   deepLinks: List<NavDeepLink> = emptyList(),
-//   crossinline destinationFactory: (TypedNavBackStackEntry<T>) -> ViceDestination<*, *, *, *>,
-// ) {
-//   bottomSheet<T>(
-//     typeMap = typeMap,
-//     deepLinks = deepLinks,
-//   ) {
-//     remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
-//   }
-// }

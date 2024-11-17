@@ -64,6 +64,7 @@ include(":samples:nav:shared")
 include(":samples:nav:wasmJsApp")
 include(":vice-core")
 include(":vice-nav")
+include(":vice-nav-material3")
 include(":vice-portal")
 include(":vice-sources")
 
