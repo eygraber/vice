@@ -18,8 +18,8 @@ repositories {
 }
 
 dependencies {
-  implementation("com.eygraber:vice-core:0.9.3")
-  implementation("com.eygraber:vice-nav:0.9.3")
+  implementation("com.eygraber:vice-core:0.9.4")
+  implementation("com.eygraber:vice-nav:0.9.4")
 }
 ```
 
