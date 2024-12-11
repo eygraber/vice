@@ -22,6 +22,7 @@ kotlin {
 
         implementation(libs.compose.lifecycle)
         api(compose.runtime)
+        api(compose.runtimeSaveable)
 
         api(libs.kotlinx.coroutines.core)
       }
