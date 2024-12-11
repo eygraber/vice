@@ -200,6 +200,26 @@ internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState> 
 }
 ```
 
+### SaveableMutableStateSource
+
+`SaveableMutableStateSource` is the same as `MutableStateSource` except it wraps its internal `State` in a
+`rememberSaveable` call.
+
+
+```kotlin
+internal class MyCounterSource : SaveableMutableStateSource<Int> {
+  override val initial = 0
+  
+  fun reset() {
+    update(0)
+  }
+  
+  fun increment() {
+    update(value + 1)
+  }
+}
+```
+
 ### DerivedStateSource
 
 `DerivedStateSource` is similar to `MutableStateSource`, but encapsulates the content of a `derivedStateOf` call:
