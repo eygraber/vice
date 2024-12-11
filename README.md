@@ -185,7 +185,6 @@ internal sealed interface MyFeatureDialogState {
   data class Error(val message: String) : MyFeatureDialogState
 }
 
-@DestinationSingleton
 internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState> {
   override val initial = MyFeatureDialogState.None
   
@@ -206,7 +205,6 @@ internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState> 
 `DerivedStateSource` is similar to `MutableStateSource`, but encapsulates the content of a `derivedStateOf` call:
 
 ```kotlin
-@DestinationSingleton
 internal class MyDerivedStateSource(
   private val fastChangingStateSource: FastChangingStateSource,
 ) : DerivedStateSource<MyDerivedState> {
@@ -227,7 +225,6 @@ internal class MyDerivedStateSource(
 `FlowSource` is backed by a `Flow<T>` and an `initial: T` and recomposes whenever the `Flow` emits.
 
 ```kotlin
-@DestinationSingleton
 internal class MyFlowSource(
   private val featureRepo: MyFeatureRepository,
 ) : FlowSource<List<MyFeatureData>> {
@@ -306,7 +303,6 @@ fun TodoListView(
 allows you to modify the `StateFlow` (which is usually implemented as a `MutableStateFlow`).
 
 ```kotlin
-@DestinationSingleton
 internal class TimerFlowSource : StateFlowSource<Int> {
   override val flow = MutableStateFlow(0)
   
@@ -329,7 +325,6 @@ internal sealed interface TimerState {
   data object Finished : TimeState
 }
 
-@DestinationSingleton
 internal class TimerFlowSource : StateFlowSource<TimerState> {
   override val flow = MutableStateFlow(TimerState.Reset)
   
@@ -345,7 +340,7 @@ internal class TimerFlowSource : StateFlowSource<TimerState> {
 
 ## ViceEffects
 
-`ViceEffects` handle non UI related aspects of a `Destination`, like analytics, lifecycle handling, etc…
+`ViceEffects` handle non UI related tasks, like analytics, lifecycle handling, etc…
 
 There is a convenient no-op implementation available at `ViceEffects.None`.
 
@@ -425,6 +420,7 @@ sealed interface HomeIntent {
   data object NavigateToSettings : HomeIntent
 }
 
+@Immutable
 data class HomeViewState(
   val items: List<TodoItem>,
 )
