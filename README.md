@@ -482,7 +482,7 @@ class HomeDestination(
   onNavigateToCreateItem: () -> Unit,
   onNavigateToUpdateItem: (String) -> Unit,
   onNavigateToSettings: () -> Unit,
-) : SampleDestination<HomeIntent, HomeCompositor, HomeViewState>() {
+) : ViceDestination<HomeIntent, HomeCompositor, ViceEffects, HomeViewState>() {
   override val view: HomeView = { state, onIntent -> HomeView(state, onIntent) }
 
   override val compositor = HomeCompositor(
@@ -490,6 +490,8 @@ class HomeDestination(
     onNavigateToUpdateItem,
     onNavigateToSettings,
   )
+
+  override val effects = ViceEffects.None
 }
 
 ```
