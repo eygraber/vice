@@ -1,17 +1,15 @@
 package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
-import com.eygraber.vice.ViceSource
 import kotlinx.coroutines.flow.Flow
 
 public abstract class SaveableMutableStateSource<T : Any>(
   private val saver: Saver<T, out Any>? = null,
-) : ViceSource<T>, State<T> {
+) : StateSource<T> {
   private val state by lazy {
     mutableStateOf(initial)
   }

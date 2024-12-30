@@ -173,11 +173,12 @@ in order to create the `ViewState`.
 
 There are several implementations provided by VICE that cover common use cases.
 
-### MutableStateSource
+### StateSource
 
-`MutableStateSource` wraps a `MutableState`, and provides an `update` function for implementations to
-mutate it. Useful for encapsulating behavior around the `MutableState` instead of managing it in the `ViceCompositor`.
+`StateSource` simply makes `ViceSource` implement Compose's `State` type, and by default provides [currentState]
+with its value.
 
+`StateSource` can be used instead of the other `State` based sources if the stricter rules of an `abstract class` aren't needed.
 
 ```kotlin
 internal sealed interface MyFeatureDialogState {
@@ -185,7 +186,58 @@ internal sealed interface MyFeatureDialogState {
   data class Error(val message: String) : MyFeatureDialogState
 }
 
-internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState> {
+internal class MyFeatureDialogSource : StateSource<MyFeatureDialogState> {
+  override var value: MyFeatureDialogState by mutableStateOf(MyFeatureDialogState.None)
+    private set
+
+  fun clearError() {
+    value = MyFeatureDialogState.None
+  }
+
+  fun showError(message: String) {
+    value = MyFeatureDialogState.Error(message)
+  }
+}
+```
+
+`StateSource` can also be used to define a custom interface, and abstract 
+implementors of it (e.g. `MutableStateSource`, etc...) can be used to provide the implementation.
+
+```kotlin
+internal sealed interface MyFeatureDialogState {
+  data object None : MyFeatureDialogState
+  data class Error(val message: String) : MyFeatureDialogState
+}
+
+internal interface MyFeatureDialogSource : StateSource<MyFeatureDialogState>
+
+internal class RealMyFeatureDialogSource : MyFeatureDialogSource, MutableStateSource<MyFeatureDialogState>() {
+  override val initial = MyFeatureDialogState.None
+
+  fun clearError() {
+    update(MyFeatureDialogState.None)
+  }
+
+  fun showError(message: String) {
+    update(
+      MyFeatureDialogState.Error(message)
+    )
+  }
+}
+```
+
+### MutableStateSource
+
+`MutableStateSource` wraps a `MutableState`, and provides an `update` function for implementations to
+mutate it. Useful for encapsulating behavior around the `MutableState` instead of managing it in the `ViceCompositor`.
+
+```kotlin
+internal sealed interface MyFeatureDialogState {
+  data object None : MyFeatureDialogState
+  data class Error(val message: String) : MyFeatureDialogState
+}
+
+internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState>() {
   override val initial = MyFeatureDialogState.None
   
   fun clearError() {
@@ -207,7 +259,7 @@ internal class MyFeatureDialogSource : MutableStateSource<MyFeatureDialogState> 
 
 
 ```kotlin
-internal class MyCounterSource : SaveableMutableStateSource<Int> {
+internal class MyCounterSource : SaveableMutableStateSource<Int>() {
   override val initial = 0
   
   fun reset() {
@@ -227,7 +279,7 @@ internal class MyCounterSource : SaveableMutableStateSource<Int> {
 ```kotlin
 internal class MyDerivedStateSource(
   private val fastChangingStateSource: FastChangingStateSource,
-) : DerivedStateSource<MyDerivedState> {
+) : DerivedStateSource<MyDerivedState>() {
   override fun deriveState(): MyDerivedState {
     val fastChangingState by fastChangingStateSource
     
@@ -247,7 +299,7 @@ internal class MyDerivedStateSource(
 ```kotlin
 internal class MyFlowSource(
   private val featureRepo: MyFeatureRepository,
-) : FlowSource<List<MyFeatureData>> {
+) : FlowSource<List<MyFeatureData>>() {
   override val initial = emptyList()
   
   override val flow = featureRepo
@@ -323,7 +375,7 @@ fun TodoListView(
 allows you to modify the `StateFlow` (which is usually implemented as a `MutableStateFlow`).
 
 ```kotlin
-internal class TimerFlowSource : StateFlowSource<Int> {
+internal class TimerFlowSource : StateFlowSource<Int>() {
   override val flow = MutableStateFlow(0)
   
   override suspend fun onAttached(scope: CoroutineScope) {
