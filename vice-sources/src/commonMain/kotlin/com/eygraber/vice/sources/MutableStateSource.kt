@@ -2,13 +2,11 @@ package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshotFlow
-import com.eygraber.vice.ViceSource
 import kotlinx.coroutines.flow.Flow
 
-public abstract class MutableStateSource<T> : ViceSource<T>, State<T> {
+public abstract class MutableStateSource<T> : StateSource<T> {
   private val state by lazy {
     mutableStateOf(initial)
   }
