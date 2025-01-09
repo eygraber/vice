@@ -292,6 +292,63 @@ internal class MyDerivedStateSource(
 }
 ```
 
+### LoadableSource
+
+`LoadableSource` is similar to a `MutableStateSource`, but allows you to differentiate between
+an initial placeholder value, and future value that will be loaded asynchronously. If the value doesn't load
+within a (configurable) amount of time, then there will be a (configurable) delay before the value is set as the state
+(so that there isn't a "flash" when transitioning from the placeholder to the actual data).
+
+This can be very powerful when combined with a skeleton loading UI like [Compose Placeholder].
+
+```kotlin
+class TodoItemsSource(
+  db: MyDatabase,
+) : LoadableSource<List<TodoItem>>() {
+  override val placeholder = listOf(
+    TodoItem(
+      id = "placeholder",
+      title = "_".repeat(20),
+      description = "_".repeat(75),
+    )
+  )
+  
+  suspend fun load() = 
+    db
+      .todoItemQueries
+      .findAll()
+}
+
+@Immutable
+data class TodoItemsViewState(
+  val items: Loadable<List<TodoItem>>,
+)
+
+@Composable
+fun TodoListView(
+  state: TodoItemsViewState,
+  onIntent: (TodoItemsIntent) -> Unit,
+) {
+  lazyColumn {
+    items(
+      items = state.items.value,
+      key = { it.id },
+    ) { todoItem ->
+      Column {
+        Text(
+          text = todoItem.title,
+          modifier = Modifier.placeholder(visible = state.items.isLoading)
+        )
+        Text(
+          text = todoItem.description,
+          modifier = Modifier.placeholder(visible = state.items.isLoading)
+        )
+      }
+    }
+  }
+}
+```
+
 ### FlowSource
 
 `FlowSource` is backed by a `Flow<T>` and an `initial: T` and recomposes whenever the `Flow` emits.
