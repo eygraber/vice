@@ -2,6 +2,7 @@ package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import com.eygraber.vice.loadable.ViceLoadable
 import com.eygraber.vice.loadable.isLoading
 import kotlinx.coroutines.delay
@@ -16,10 +17,11 @@ public abstract class LoadableSource<T> : StateSource<ViceLoadable<T>> {
 
   public abstract val placeholder: T
 
-  private val loadingPlaceholder get() = ViceLoadable.Loading(placeholder)
+  private val state by lazy {
+    mutableStateOf<ViceLoadable<T>>(ViceLoadable.Loading(placeholder))
+  }
 
-  final override var value: ViceLoadable<T> = loadingPlaceholder
-    private set
+  final override val value: ViceLoadable<T> get() = state.value
 
   protected abstract suspend fun load(): T
 
@@ -37,9 +39,9 @@ public abstract class LoadableSource<T> : StateSource<ViceLoadable<T>> {
         }
       }
 
-      value = ViceLoadable.Loaded(loadedValue)
+      state.value = ViceLoadable.Loaded(loadedValue)
     }
 
-    return super.currentState()
+    return state.value
   }
 }
