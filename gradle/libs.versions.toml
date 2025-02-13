@@ -5,7 +5,7 @@ android-sdk-compile = "35"
 android-sdk-target = "35"
 android-sdk-min = "24"
 
-composeJetbrains = "1.7.3"
+composeJetbrains = "1.8.0-alpha03"
 composeLifecycle = "2.8.4"
 
 conventions = "0.0.81"
@@ -40,7 +40,7 @@ buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ver
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
 compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
-compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha12"
+compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha13"
 compose-navigationAndroid = "androidx.navigation:navigation-compose:2.8.7"
 compose-navigationMaterial3 = "com.eygraber:compose-material3-navigation:0.0.7"
 

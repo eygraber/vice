@@ -54,7 +54,7 @@ public fun Modifier.sharedElement(
   clipInOverlayDuringTransition: OverlayClip = ParentClip,
 ): Modifier = with(sharedTransitionScope) {
   this@sharedElement.sharedElement(
-    state = state,
+    sharedContentState = state,
     animatedVisibilityScope = animatedVisibilityScope,
     boundsTransform = boundsTransform,
     placeHolderSize = placeHolderSize,
