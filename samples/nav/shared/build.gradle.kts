@@ -25,6 +25,7 @@ kotlin {
         implementation(projects.viceNav)
 
         implementation(compose.material3)
+        api(libs.compose.materialIcons)
 
         implementation(libs.kotlinx.coroutines.core)
         implementation(libs.kotlinx.serialization.json)
