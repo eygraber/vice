@@ -8,10 +8,10 @@ plugins {
   alias(libs.plugins.kotlinxSerialization)
 }
 
-group = "samples-nav-shared"
+group = "samples-shared"
 
 android {
-  namespace = "com.eygraber.vice.samples.nav.shared"
+  namespace = "com.eygraber.vice.samples.shared"
 }
 
 kotlin {
@@ -22,8 +22,7 @@ kotlin {
   sourceSets {
     commonMain {
       dependencies {
-        implementation(projects.samples.shared)
-        implementation(projects.viceNav)
+        implementation(projects.viceCore)
 
         implementation(compose.material3)
         api(libs.compose.materialIcons)
