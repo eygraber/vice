@@ -101,11 +101,11 @@ private val DefaultSpring = spring(
 private val ParentClip: OverlayClip =
   object : OverlayClip {
     override fun getClipPath(
-      state: SharedContentState,
+      sharedContentState: SharedContentState,
       bounds: Rect,
       layoutDirection: LayoutDirection,
       density: Density,
-    ): Path? = state.parentSharedContentState?.clipPathInOverlay
+    ): Path? = sharedContentState.parentSharedContentState?.clipPathInOverlay
   }
 
 @ExperimentalSharedTransitionApi
