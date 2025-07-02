@@ -49,7 +49,7 @@ public abstract class ViceNavEntryFactory<T, I, C, E, S>(
 
   public operator fun invoke(
     key: T,
-    metadata: Map<String, Any>,
+    metadata: Map<String, Any> = emptyMap(),
   ): NavEntry<T> = ViceNavEntry(
     key = key,
     view = view,
