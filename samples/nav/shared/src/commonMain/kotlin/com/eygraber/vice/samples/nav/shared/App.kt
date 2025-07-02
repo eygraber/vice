@@ -6,10 +6,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.eygraber.vice.nav.viceComposable
 import com.eygraber.vice.nav.viceDialog
-import com.eygraber.vice.samples.nav.shared.about.AboutUsDestination
-import com.eygraber.vice.samples.nav.shared.details.DetailsDestination
-import com.eygraber.vice.samples.nav.shared.home.HomeDestination
-import com.eygraber.vice.samples.nav.shared.settings.SettingsDestination
 
 @Composable
 fun App() {
