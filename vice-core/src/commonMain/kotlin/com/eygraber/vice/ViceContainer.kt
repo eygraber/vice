@@ -36,8 +36,15 @@ public abstract class ViceContainer<I, C, E, S>(
   }
 }
 
+@Composable
+public fun <I : Any, S : Any> Vice(
+  args: ViceArgs<I, S>,
+) {
+  RunVice(args)
+}
+
 @Stable
-private data class ViceArgs<I : Any, S : Any>(
+public data class ViceArgs<I : Any, S : Any>(
   val view: ViceView<I, S>,
   val intents: MutableSharedFlow<I>,
   val compositor: ViceCompositor<I, S>,

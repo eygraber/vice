@@ -8,22 +8,24 @@ plugins {
   alias(libs.plugins.kotlinxSerialization)
 }
 
-group = "samples-nav-shared"
+group = "samples-nav3-shared"
 
 android {
-  namespace = "com.eygraber.vice.samples.nav.shared"
+  namespace = "com.eygraber.vice.samples.nav3.shared"
 }
 
 kotlin {
-  defaultKmpTargets(
+  kmpTargets(
+    KmpTarget.Android,
     project = project,
+    ignoreDefaultTargets = true,
   )
 
   sourceSets {
     commonMain {
       dependencies {
         implementation(projects.samples.shared)
-        implementation(projects.viceNav)
+        implementation(projects.viceNav3)
 
         implementation(compose.material3)
         api(libs.compose.materialIcons)
