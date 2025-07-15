@@ -20,7 +20,7 @@ kotlin = "2.2.0"
 
 kotlinx-coroutines = "1.10.2"
 
-ktlint = "1.6.0"
+ktlint = "1.7.0"
 
 publish = "0.34.0"
 
