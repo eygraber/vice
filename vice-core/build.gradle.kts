@@ -17,6 +17,14 @@ kotlin {
     project = project,
   )
 
+  js {
+    browser {
+      testTask {
+        enabled = false
+      }
+    }
+  }
+
   sourceSets {
     androidMain {
       dependencies {
