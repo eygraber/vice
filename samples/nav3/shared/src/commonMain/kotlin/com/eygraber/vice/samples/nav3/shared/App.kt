@@ -28,50 +28,66 @@ fun App() {
         is Routes -> when(key) {
           Routes.Home -> ViceNavEntry(
             key = key,
-            view = { state, onIntent -> HomeView(state, onIntent) },
-            compositor = HomeCompositor(
-              onNavigateToCreateItem = { backStack.add(Routes.Details.Create) },
-              onNavigateToUpdateItem = { id -> backStack.add(Routes.Details.Update(id)) },
-              onNavigateToSettings = { backStack.add(Routes.Settings.Home) },
-            ),
-            effects = ViceEffects.None,
+            viewProvider = {
+              @Composable { state, onIntent -> HomeView(state, onIntent) }
+            },
+            compositorProvider = {
+              HomeCompositor(
+                onNavigateToCreateItem = { backStack.add(Routes.Details.Create) },
+                onNavigateToUpdateItem = { id -> backStack.add(Routes.Details.Update(id)) },
+                onNavigateToSettings = { backStack.add(Routes.Settings.Home) },
+              )
+            },
+            effectsProvider = ViceEffects::None,
           )
 
           is Routes.Details -> ViceNavEntry(
             key = key,
-            view = { state, onIntent -> DetailsView(state, onIntent) },
-            compositor = DetailsCompositor(
-              op = when(key) {
-                Routes.Details.Create -> DetailsOp.Create
-                is Routes.Details.Update -> DetailsOp.Update(key.id)
-              },
-              onNavigateBack = backStack::removeLastOrNull,
-            ),
-            effects = ViceEffects.None,
+            viewProvider = {
+              @Composable { state, onIntent -> DetailsView(state, onIntent) }
+            },
+            compositorProvider = {
+              DetailsCompositor(
+                op = when(key) {
+                  Routes.Details.Create -> DetailsOp.Create
+                  is Routes.Details.Update -> DetailsOp.Update(key.id)
+                },
+                onNavigateBack = backStack::removeLastOrNull,
+              )
+            },
+            effectsProvider = ViceEffects::None,
           )
 
           Routes.Settings.Home -> ViceNavEntry(
             key = Routes.Settings.Home,
-            view = { state, onIntent -> SettingsView(state, onIntent) },
-            compositor = SettingsCompositor(
-              onNavigateBack = backStack::removeLastOrNull,
-              onNavigateToAboutUs = {
-                while(true) {
-                  if(backStack.removeLastOrNull() is Routes.Settings.Home) {
-                    break
+            viewProvider = {
+              @Composable { state, onIntent -> SettingsView(state, onIntent) }
+            },
+            compositorProvider = {
+              SettingsCompositor(
+                onNavigateBack = backStack::removeLastOrNull,
+                onNavigateToAboutUs = {
+                  while(true) {
+                    if(backStack.removeLastOrNull() is Routes.Settings.Home) {
+                      break
+                    }
                   }
-                }
-                backStack.add(Routes.Settings.AboutUs)
-              },
-            ),
-            effects = ViceEffects.None,
+                  backStack.add(Routes.Settings.AboutUs)
+                },
+              )
+            },
+            effectsProvider = ViceEffects::None,
           )
 
           Routes.Settings.AboutUs -> ViceNavEntry(
             key = Routes.Settings.AboutUs,
-            view = { state, onIntent -> AboutUsView(state, onIntent) },
-            compositor = AboutUsCompositor(backStack::removeLastOrNull),
-            effects = ViceEffects.None,
+            viewProvider = {
+              @Composable { state, onIntent -> AboutUsView(state, onIntent) }
+            },
+            compositorProvider = {
+              AboutUsCompositor(backStack::removeLastOrNull)
+            },
+            effectsProvider = ViceEffects::None,
           )
         }
 
