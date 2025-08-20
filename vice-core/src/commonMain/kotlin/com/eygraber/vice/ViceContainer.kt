@@ -59,6 +59,9 @@ private fun <I : Any, S : Any> ViceUdf(
   args.effects.Launch()
 
   val state = args.compositor.composite()
+
+  // explicitly remembering the lambda because as a library we
+  // have no way of knowing if strong skipping is enabled or not
   val intentHandler: (I) -> Unit = remember(args.intentFilters, args.compositor, args.intents) {
     { intent: I ->
       if(args.intentFilters.all { it.filter(intent) }) {
