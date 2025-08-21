@@ -1,0 +1,17 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.eygraber:vice-portal>
+abstract class <#A: kotlin/Any?, #B: kotlin/Any, #C: com.eygraber.vice/ViceCompositor<#B, #E>, #D: com.eygraber.vice/ViceEffects, #E: kotlin/Any> com.eygraber.vice.portal/VicePortal : com.eygraber.portal.compose/ComposePortal<#A>, com.eygraber.vice/ViceContainer<#B, #C, #D, #E> { // com.eygraber.vice.portal/VicePortal|null[0]
+    constructor <init>() // com.eygraber.vice.portal/VicePortal.<init>|<init>(){}[0]
+
+    final fun Render(androidx.compose.runtime/Composer?, kotlin/Int) // com.eygraber.vice.portal/VicePortal.Render|Render(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final val com.eygraber.vice.portal/com_eygraber_vice_portal_VicePortal$stableprop // com.eygraber.vice.portal/com_eygraber_vice_portal_VicePortal$stableprop|#static{}com_eygraber_vice_portal_VicePortal$stableprop[0]
+
+final fun com.eygraber.vice.portal/com_eygraber_vice_portal_VicePortal$stableprop_getter(): kotlin/Int // com.eygraber.vice.portal/com_eygraber_vice_portal_VicePortal$stableprop_getter|com_eygraber_vice_portal_VicePortal$stableprop_getter(){}[0]

@@ -101,5 +101,27 @@ jobs:
         run: ./gradlew iosX64Test
         if: matrix.os == 'macos-latest'
 
+  abi_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version-file: .ci-java-version
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: wrapper
+
+      - name: Check ABI compatibility
+        run: ./gradlew checkLegacyAbi
+
+      - name: 'Notify on failure'
+        if: failure()
+        run: echo "ABI check failed. Run ./gradlew updateLegacyAbi to fix."
+
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx16g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"

@@ -1,0 +1,36 @@
+public final class com/eygraber/vice/nav/SharedTransitionsKt {
+	public static final fun getLocalAnimatedVisibilityScope ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun getLocalSharedTransitionScope ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun rememberSharedContentState (Ljava/lang/Object;Landroidx/compose/runtime/Composer;I)Landroidx/compose/animation/SharedTransitionScope$SharedContentState;
+	public static final fun sharedBounds (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/EnterTransition;Landroidx/compose/animation/ExitTransition;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$ResizeMode;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun sharedBounds$default (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/EnterTransition;Landroidx/compose/animation/ExitTransition;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$ResizeMode;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun sharedElement (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun sharedElement$default (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class com/eygraber/vice/nav/TypedNavBackStackEntry {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;Landroidx/navigation/NavBackStackEntry;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun component2 ()Landroidx/navigation/NavBackStackEntry;
+	public final fun copy (Ljava/lang/Object;Landroidx/navigation/NavBackStackEntry;)Lcom/eygraber/vice/nav/TypedNavBackStackEntry;
+	public static synthetic fun copy$default (Lcom/eygraber/vice/nav/TypedNavBackStackEntry;Ljava/lang/Object;Landroidx/navigation/NavBackStackEntry;ILjava/lang/Object;)Lcom/eygraber/vice/nav/TypedNavBackStackEntry;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEntry ()Landroidx/navigation/NavBackStackEntry;
+	public final fun getRoute ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/eygraber/vice/nav/ViceDestination : com/eygraber/vice/ViceContainer {
+	public static final field $stable I
+	public fun <init> ()V
+}
+
+public final class com/eygraber/vice/nav/ViceNavGraphBuilderKt {
+	public static final fun viceComposable (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun viceComposable$default (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static final fun viceDialog (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Landroidx/compose/ui/window/DialogProperties;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun viceDialog$default (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Landroidx/compose/ui/window/DialogProperties;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+

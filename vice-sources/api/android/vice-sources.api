@@ -1,0 +1,119 @@
+public abstract interface class com/eygraber/vice/loadable/ViceLoadable {
+	public abstract fun getValue ()Ljava/lang/Object;
+}
+
+public final class com/eygraber/vice/loadable/ViceLoadable$Loaded : com/eygraber/vice/loadable/ViceLoadable {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/eygraber/vice/loadable/ViceLoadable$Loaded;
+	public static synthetic fun copy$default (Lcom/eygraber/vice/loadable/ViceLoadable$Loaded;Ljava/lang/Object;ILjava/lang/Object;)Lcom/eygraber/vice/loadable/ViceLoadable$Loaded;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/eygraber/vice/loadable/ViceLoadable$Loading : com/eygraber/vice/loadable/ViceLoadable {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Lcom/eygraber/vice/loadable/ViceLoadable$Loading;
+	public static synthetic fun copy$default (Lcom/eygraber/vice/loadable/ViceLoadable$Loading;Ljava/lang/Object;ILjava/lang/Object;)Lcom/eygraber/vice/loadable/ViceLoadable$Loading;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getValue ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/eygraber/vice/loadable/ViceLoadableKt {
+	public static final fun getLoadedValueOrNull (Lcom/eygraber/vice/loadable/ViceLoadable;)Ljava/lang/Object;
+	public static final fun isLoaded (Lcom/eygraber/vice/loadable/ViceLoadable;)Z
+	public static final fun isLoading (Lcom/eygraber/vice/loadable/ViceLoadable;)Z
+	public static final fun isNotLoaded (Lcom/eygraber/vice/loadable/ViceLoadable;)Z
+	public static final fun isNotLoading (Lcom/eygraber/vice/loadable/ViceLoadable;)Z
+	public static final fun map (Lcom/eygraber/vice/loadable/ViceLoadable;Lkotlin/jvm/functions/Function1;)Lcom/eygraber/vice/loadable/ViceLoadable;
+	public static final fun mapValue (Lcom/eygraber/vice/loadable/ViceLoadable;Lkotlin/jvm/functions/Function1;)Lcom/eygraber/vice/loadable/ViceLoadable;
+}
+
+public abstract class com/eygraber/vice/sources/DerivedStateSource : com/eygraber/vice/sources/StateSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun deriveState ()Ljava/lang/Object;
+	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
+	public fun getValue ()Ljava/lang/Object;
+}
+
+public abstract class com/eygraber/vice/sources/FlowSource : com/eygraber/vice/ViceSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun getFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected abstract fun getInitial ()Ljava/lang/Object;
+}
+
+public abstract class com/eygraber/vice/sources/LoadableFlowSource : com/eygraber/vice/sources/StateFlowSource {
+	public static final field $stable I
+	public fun <init> ()V
+	protected abstract fun getDataFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected fun getFlow ()Lkotlinx/coroutines/flow/StateFlow;
+	protected fun getInitialLoadingThreshold-UwyO8pc ()J
+	protected fun getMinLoadingDuration-UwyO8pc ()J
+	protected abstract fun getPlaceholder ()Ljava/lang/Object;
+	protected fun isBufferingEmissionsWhileLoading ()Z
+	protected fun onAttached (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/eygraber/vice/sources/LoadableSource : com/eygraber/vice/sources/StateSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun currentState (Landroidx/compose/runtime/Composer;I)Lcom/eygraber/vice/loadable/ViceLoadable;
+	public synthetic fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected fun getInitialLoadingThreshold-UwyO8pc ()J
+	protected fun getMinLoadingDuration-UwyO8pc ()J
+	public abstract fun getPlaceholder ()Ljava/lang/Object;
+	public final fun getValue ()Lcom/eygraber/vice/loadable/ViceLoadable;
+	public synthetic fun getValue ()Ljava/lang/Object;
+	protected abstract fun load (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/eygraber/vice/sources/MutableStateSource : com/eygraber/vice/sources/StateSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun getInitial ()Ljava/lang/Object;
+	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
+	public fun getValue ()Ljava/lang/Object;
+	protected final fun update (Ljava/lang/Object;)V
+}
+
+public abstract class com/eygraber/vice/sources/SaveableMutableStateSource : com/eygraber/vice/sources/StateSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Landroidx/compose/runtime/saveable/Saver;)V
+	public synthetic fun <init> (Landroidx/compose/runtime/saveable/Saver;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun getInitial ()Ljava/lang/Object;
+	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
+	public fun getValue ()Ljava/lang/Object;
+	protected final fun update (Ljava/lang/Object;)V
+}
+
+public abstract class com/eygraber/vice/sources/StateFlowSource : com/eygraber/vice/ViceSource {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun getFlow ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun getValue ()Ljava/lang/Object;
+	protected abstract fun onAttached (Lkotlinx/coroutines/CoroutineScope;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/eygraber/vice/sources/StateSource : androidx/compose/runtime/State, com/eygraber/vice/ViceSource {
+	public fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+}
+
+public final class com/eygraber/vice/sources/StateSource$DefaultImpls {
+	public static fun currentState (Lcom/eygraber/vice/sources/StateSource;Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+}
+

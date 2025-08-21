@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
+
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
   id("com.eygraber.conventions-android-library")
@@ -35,4 +37,7 @@ kotlin {
       }
     }
   }
+
+  @OptIn(ExperimentalAbiValidation::class)
+  abiValidation.enabled = true
 }

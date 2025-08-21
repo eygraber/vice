@@ -1,4 +1,5 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
@@ -63,4 +64,7 @@ kotlin {
       }
     }
   }
+
+  @OptIn(ExperimentalAbiValidation::class)
+  abiValidation.enabled = true
 }
