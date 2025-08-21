@@ -1,0 +1,13 @@
+public final class com/eygraber/vice/nav/material3/ComposableSingletons$ViceMaterial3NavGraphBuilderKt {
+	public static final field INSTANCE Lcom/eygraber/vice/nav/material3/ComposableSingletons$ViceMaterial3NavGraphBuilderKt;
+	public fun <init> ()V
+	public final fun getLambda$-729471209$vice_nav_material3_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1728738388$vice_nav_material3_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda-2$vice_nav_material3_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class com/eygraber/vice/nav/material3/ViceMaterial3NavGraphBuilderKt {
+	public static final fun viceBottomSheet (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Landroidx/compose/ui/Modifier;Landroidx/compose/material3/ModalBottomSheetProperties;ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun viceBottomSheet$default (Landroidx/navigation/NavGraphBuilder;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Landroidx/compose/ui/Modifier;Landroidx/compose/material3/ModalBottomSheetProperties;ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+

@@ -1,0 +1,172 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.eygraber:vice-sources>
+abstract interface <#A: kotlin/Any?> com.eygraber.vice.sources/StateSource : androidx.compose.runtime/State<#A>, com.eygraber.vice/ViceSource<#A> { // com.eygraber.vice.sources/StateSource|null[0]
+    open fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/StateSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+sealed interface <#A: kotlin/Any?> com.eygraber.vice.loadable/ViceLoadable { // com.eygraber.vice.loadable/ViceLoadable|null[0]
+    abstract val value // com.eygraber.vice.loadable/ViceLoadable.value|{}value[0]
+        abstract fun <get-value>(): #A // com.eygraber.vice.loadable/ViceLoadable.value.<get-value>|<get-value>(){}[0]
+
+    final class <#A1: kotlin/Any?> Loaded : com.eygraber.vice.loadable/ViceLoadable<#A1> { // com.eygraber.vice.loadable/ViceLoadable.Loaded|null[0]
+        constructor <init>(#A1) // com.eygraber.vice.loadable/ViceLoadable.Loaded.<init>|<init>(1:0){}[0]
+
+        final val value // com.eygraber.vice.loadable/ViceLoadable.Loaded.value|{}value[0]
+            final fun <get-value>(): #A1 // com.eygraber.vice.loadable/ViceLoadable.Loaded.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): #A1 // com.eygraber.vice.loadable/ViceLoadable.Loaded.component1|component1(){}[0]
+        final fun copy(#A1 = ...): com.eygraber.vice.loadable/ViceLoadable.Loaded<#A1> // com.eygraber.vice.loadable/ViceLoadable.Loaded.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.eygraber.vice.loadable/ViceLoadable.Loaded.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.eygraber.vice.loadable/ViceLoadable.Loaded.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.eygraber.vice.loadable/ViceLoadable.Loaded.toString|toString(){}[0]
+    }
+
+    final class <#A1: kotlin/Any?> Loading : com.eygraber.vice.loadable/ViceLoadable<#A1> { // com.eygraber.vice.loadable/ViceLoadable.Loading|null[0]
+        constructor <init>(#A1) // com.eygraber.vice.loadable/ViceLoadable.Loading.<init>|<init>(1:0){}[0]
+
+        final val value // com.eygraber.vice.loadable/ViceLoadable.Loading.value|{}value[0]
+            final fun <get-value>(): #A1 // com.eygraber.vice.loadable/ViceLoadable.Loading.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): #A1 // com.eygraber.vice.loadable/ViceLoadable.Loading.component1|component1(){}[0]
+        final fun copy(#A1 = ...): com.eygraber.vice.loadable/ViceLoadable.Loading<#A1> // com.eygraber.vice.loadable/ViceLoadable.Loading.copy|copy(1:0){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.eygraber.vice.loadable/ViceLoadable.Loading.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.eygraber.vice.loadable/ViceLoadable.Loading.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.eygraber.vice.loadable/ViceLoadable.Loading.toString|toString(){}[0]
+    }
+}
+
+abstract class <#A: kotlin/Any> com.eygraber.vice.sources/SaveableMutableStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/SaveableMutableStateSource|null[0]
+    constructor <init>(androidx.compose.runtime.saveable/Saver<#A, out kotlin/Any>? = ...) // com.eygraber.vice.sources/SaveableMutableStateSource.<init>|<init>(androidx.compose.runtime.saveable.Saver<1:0,out|kotlin.Any>?){}[0]
+
+    abstract val initial // com.eygraber.vice.sources/SaveableMutableStateSource.initial|{}initial[0]
+        abstract fun <get-initial>(): #A // com.eygraber.vice.sources/SaveableMutableStateSource.initial.<get-initial>|<get-initial>(){}[0]
+    final val updates // com.eygraber.vice.sources/SaveableMutableStateSource.updates|{}updates[0]
+        final fun <get-updates>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/SaveableMutableStateSource.updates.<get-updates>|<get-updates>(){}[0]
+    open val value // com.eygraber.vice.sources/SaveableMutableStateSource.value|{}value[0]
+        open fun <get-value>(): #A // com.eygraber.vice.sources/SaveableMutableStateSource.value.<get-value>|<get-value>(){}[0]
+
+    final fun update(#A) // com.eygraber.vice.sources/SaveableMutableStateSource.update|update(1:0){}[0]
+    open fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/SaveableMutableStateSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/DerivedStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/DerivedStateSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/DerivedStateSource.<init>|<init>(){}[0]
+
+    final val updates // com.eygraber.vice.sources/DerivedStateSource.updates|{}updates[0]
+        final fun <get-updates>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/DerivedStateSource.updates.<get-updates>|<get-updates>(){}[0]
+    open val value // com.eygraber.vice.sources/DerivedStateSource.value|{}value[0]
+        open fun <get-value>(): #A // com.eygraber.vice.sources/DerivedStateSource.value.<get-value>|<get-value>(){}[0]
+
+    abstract fun deriveState(): #A // com.eygraber.vice.sources/DerivedStateSource.deriveState|deriveState(){}[0]
+    final fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/DerivedStateSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/FlowSource : com.eygraber.vice/ViceSource<#A> { // com.eygraber.vice.sources/FlowSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/FlowSource.<init>|<init>(){}[0]
+
+    abstract val flow // com.eygraber.vice.sources/FlowSource.flow|{}flow[0]
+        abstract fun <get-flow>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/FlowSource.flow.<get-flow>|<get-flow>(){}[0]
+    abstract val initial // com.eygraber.vice.sources/FlowSource.initial|{}initial[0]
+        abstract fun <get-initial>(): #A // com.eygraber.vice.sources/FlowSource.initial.<get-initial>|<get-initial>(){}[0]
+
+    final fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/FlowSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableFlowSource : com.eygraber.vice.sources/StateFlowSource<com.eygraber.vice.loadable/ViceLoadable<#A>> { // com.eygraber.vice.sources/LoadableFlowSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/LoadableFlowSource.<init>|<init>(){}[0]
+
+    abstract val dataFlow // com.eygraber.vice.sources/LoadableFlowSource.dataFlow|{}dataFlow[0]
+        abstract fun <get-dataFlow>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/LoadableFlowSource.dataFlow.<get-dataFlow>|<get-dataFlow>(){}[0]
+    abstract val placeholder // com.eygraber.vice.sources/LoadableFlowSource.placeholder|{}placeholder[0]
+        abstract fun <get-placeholder>(): #A // com.eygraber.vice.sources/LoadableFlowSource.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
+    open val flow // com.eygraber.vice.sources/LoadableFlowSource.flow|{}flow[0]
+        open fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<com.eygraber.vice.loadable/ViceLoadable<#A>> // com.eygraber.vice.sources/LoadableFlowSource.flow.<get-flow>|<get-flow>(){}[0]
+    open val initialLoadingThreshold // com.eygraber.vice.sources/LoadableFlowSource.initialLoadingThreshold|{}initialLoadingThreshold[0]
+        open fun <get-initialLoadingThreshold>(): kotlin.time/Duration // com.eygraber.vice.sources/LoadableFlowSource.initialLoadingThreshold.<get-initialLoadingThreshold>|<get-initialLoadingThreshold>(){}[0]
+    open val isBufferingEmissionsWhileLoading // com.eygraber.vice.sources/LoadableFlowSource.isBufferingEmissionsWhileLoading|{}isBufferingEmissionsWhileLoading[0]
+        open fun <get-isBufferingEmissionsWhileLoading>(): kotlin/Boolean // com.eygraber.vice.sources/LoadableFlowSource.isBufferingEmissionsWhileLoading.<get-isBufferingEmissionsWhileLoading>|<get-isBufferingEmissionsWhileLoading>(){}[0]
+    open val minLoadingDuration // com.eygraber.vice.sources/LoadableFlowSource.minLoadingDuration|{}minLoadingDuration[0]
+        open fun <get-minLoadingDuration>(): kotlin.time/Duration // com.eygraber.vice.sources/LoadableFlowSource.minLoadingDuration.<get-minLoadingDuration>|<get-minLoadingDuration>(){}[0]
+
+    open suspend fun onAttached(kotlinx.coroutines/CoroutineScope) // com.eygraber.vice.sources/LoadableFlowSource.onAttached|onAttached(kotlinx.coroutines.CoroutineScope){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableSource : com.eygraber.vice.sources/StateSource<com.eygraber.vice.loadable/ViceLoadable<#A>> { // com.eygraber.vice.sources/LoadableSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/LoadableSource.<init>|<init>(){}[0]
+
+    abstract val placeholder // com.eygraber.vice.sources/LoadableSource.placeholder|{}placeholder[0]
+        abstract fun <get-placeholder>(): #A // com.eygraber.vice.sources/LoadableSource.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
+    final val value // com.eygraber.vice.sources/LoadableSource.value|{}value[0]
+        final fun <get-value>(): com.eygraber.vice.loadable/ViceLoadable<#A> // com.eygraber.vice.sources/LoadableSource.value.<get-value>|<get-value>(){}[0]
+    open val initialLoadingThreshold // com.eygraber.vice.sources/LoadableSource.initialLoadingThreshold|{}initialLoadingThreshold[0]
+        open fun <get-initialLoadingThreshold>(): kotlin.time/Duration // com.eygraber.vice.sources/LoadableSource.initialLoadingThreshold.<get-initialLoadingThreshold>|<get-initialLoadingThreshold>(){}[0]
+    open val minLoadingDuration // com.eygraber.vice.sources/LoadableSource.minLoadingDuration|{}minLoadingDuration[0]
+        open fun <get-minLoadingDuration>(): kotlin.time/Duration // com.eygraber.vice.sources/LoadableSource.minLoadingDuration.<get-minLoadingDuration>|<get-minLoadingDuration>(){}[0]
+
+    abstract suspend fun load(): #A // com.eygraber.vice.sources/LoadableSource.load|load(){}[0]
+    open fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): com.eygraber.vice.loadable/ViceLoadable<#A> // com.eygraber.vice.sources/LoadableSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/MutableStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/MutableStateSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/MutableStateSource.<init>|<init>(){}[0]
+
+    abstract val initial // com.eygraber.vice.sources/MutableStateSource.initial|{}initial[0]
+        abstract fun <get-initial>(): #A // com.eygraber.vice.sources/MutableStateSource.initial.<get-initial>|<get-initial>(){}[0]
+    final val updates // com.eygraber.vice.sources/MutableStateSource.updates|{}updates[0]
+        final fun <get-updates>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/MutableStateSource.updates.<get-updates>|<get-updates>(){}[0]
+    open val value // com.eygraber.vice.sources/MutableStateSource.value|{}value[0]
+        open fun <get-value>(): #A // com.eygraber.vice.sources/MutableStateSource.value.<get-value>|<get-value>(){}[0]
+
+    final fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/MutableStateSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    final fun update(#A) // com.eygraber.vice.sources/MutableStateSource.update|update(1:0){}[0]
+}
+
+abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/StateFlowSource : com.eygraber.vice/ViceSource<#A> { // com.eygraber.vice.sources/StateFlowSource|null[0]
+    constructor <init>() // com.eygraber.vice.sources/StateFlowSource.<init>|<init>(){}[0]
+
+    abstract val flow // com.eygraber.vice.sources/StateFlowSource.flow|{}flow[0]
+        abstract fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<#A> // com.eygraber.vice.sources/StateFlowSource.flow.<get-flow>|<get-flow>(){}[0]
+    final val value // com.eygraber.vice.sources/StateFlowSource.value|{}value[0]
+        final fun <get-value>(): #A // com.eygraber.vice.sources/StateFlowSource.value.<get-value>|<get-value>(){}[0]
+
+    abstract suspend fun onAttached(kotlinx.coroutines/CoroutineScope) // com.eygraber.vice.sources/StateFlowSource.onAttached|onAttached(kotlinx.coroutines.CoroutineScope){}[0]
+    final fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/StateFlowSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final val com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop|#static{}com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop[0]
+final val com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop|#static{}com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop[0]
+final val com.eygraber.vice.loadable/isLoaded // com.eygraber.vice.loadable/isLoaded|@com.eygraber.vice.loadable.ViceLoadable<*>{}isLoaded[0]
+    final inline fun (com.eygraber.vice.loadable/ViceLoadable<*>).<get-isLoaded>(): kotlin/Boolean // com.eygraber.vice.loadable/isLoaded.<get-isLoaded>|<get-isLoaded>@com.eygraber.vice.loadable.ViceLoadable<*>(){}[0]
+final val com.eygraber.vice.loadable/isLoading // com.eygraber.vice.loadable/isLoading|@com.eygraber.vice.loadable.ViceLoadable<*>{}isLoading[0]
+    final inline fun (com.eygraber.vice.loadable/ViceLoadable<*>).<get-isLoading>(): kotlin/Boolean // com.eygraber.vice.loadable/isLoading.<get-isLoading>|<get-isLoading>@com.eygraber.vice.loadable.ViceLoadable<*>(){}[0]
+final val com.eygraber.vice.loadable/isNotLoaded // com.eygraber.vice.loadable/isNotLoaded|@com.eygraber.vice.loadable.ViceLoadable<*>{}isNotLoaded[0]
+    final inline fun (com.eygraber.vice.loadable/ViceLoadable<*>).<get-isNotLoaded>(): kotlin/Boolean // com.eygraber.vice.loadable/isNotLoaded.<get-isNotLoaded>|<get-isNotLoaded>@com.eygraber.vice.loadable.ViceLoadable<*>(){}[0]
+final val com.eygraber.vice.loadable/isNotLoading // com.eygraber.vice.loadable/isNotLoading|@com.eygraber.vice.loadable.ViceLoadable<*>{}isNotLoading[0]
+    final inline fun (com.eygraber.vice.loadable/ViceLoadable<*>).<get-isNotLoading>(): kotlin/Boolean // com.eygraber.vice.loadable/isNotLoading.<get-isNotLoading>|<get-isNotLoading>@com.eygraber.vice.loadable.ViceLoadable<*>(){}[0]
+final val com.eygraber.vice.loadable/loadedValueOrNull // com.eygraber.vice.loadable/loadedValueOrNull|@com.eygraber.vice.loadable.ViceLoadable<0:0>{0§<kotlin.Any?>}loadedValueOrNull[0]
+    final inline fun <#A1: kotlin/Any?> (com.eygraber.vice.loadable/ViceLoadable<#A1>).<get-loadedValueOrNull>(): #A1? // com.eygraber.vice.loadable/loadedValueOrNull.<get-loadedValueOrNull>|<get-loadedValueOrNull>@com.eygraber.vice.loadable.ViceLoadable<0:0>(){0§<kotlin.Any?>}[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop|#static{}com_eygraber_vice_sources_DerivedStateSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_FlowSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_FlowSource$stableprop|#static{}com_eygraber_vice_sources_FlowSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableFlowSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableFlowSource$stableprop|#static{}com_eygraber_vice_sources_LoadableFlowSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableSource$stableprop|#static{}com_eygraber_vice_sources_LoadableSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_MutableStateSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_MutableStateSource$stableprop|#static{}com_eygraber_vice_sources_MutableStateSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop|#static{}com_eygraber_vice_sources_SaveableMutableStateSource$stableprop[0]
+final val com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop|#static{}com_eygraber_vice_sources_StateFlowSource$stableprop[0]
+
+final fun com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter(): kotlin/Int // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter|com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter(){}[0]
+final fun com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter(): kotlin/Int // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter|com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop_getter|com_eygraber_vice_sources_DerivedStateSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_FlowSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_FlowSource$stableprop_getter|com_eygraber_vice_sources_FlowSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableFlowSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableFlowSource$stableprop_getter|com_eygraber_vice_sources_LoadableFlowSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_LoadableSource$stableprop_getter|com_eygraber_vice_sources_LoadableSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_MutableStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_MutableStateSource$stableprop_getter|com_eygraber_vice_sources_MutableStateSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter|com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop_getter|com_eygraber_vice_sources_StateFlowSource$stableprop_getter(){}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (com.eygraber.vice.loadable/ViceLoadable<#A>).com.eygraber.vice.loadable/map(kotlin/Function1<#A, com.eygraber.vice.loadable/ViceLoadable<#B>>): com.eygraber.vice.loadable/ViceLoadable<#B> // com.eygraber.vice.loadable/map|map@com.eygraber.vice.loadable.ViceLoadable<0:0>(kotlin.Function1<0:0,com.eygraber.vice.loadable.ViceLoadable<0:1>>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (com.eygraber.vice.loadable/ViceLoadable<#A>).com.eygraber.vice.loadable/mapValue(kotlin/Function1<#A, #B>): com.eygraber.vice.loadable/ViceLoadable<#B> // com.eygraber.vice.loadable/mapValue|mapValue@com.eygraber.vice.loadable.ViceLoadable<0:0>(kotlin.Function1<0:0,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]

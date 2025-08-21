@@ -1,0 +1,84 @@
+public final class com/eygraber/vice/ViceArgs {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function4;Lkotlinx/coroutines/flow/MutableSharedFlow;Lcom/eygraber/vice/ViceCompositor;Ljava/util/List;Lcom/eygraber/vice/ViceEffects;)V
+	public final fun component1 ()Lkotlin/jvm/functions/Function4;
+	public final fun component2 ()Lkotlinx/coroutines/flow/MutableSharedFlow;
+	public final fun component3 ()Lcom/eygraber/vice/ViceCompositor;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lcom/eygraber/vice/ViceEffects;
+	public final fun copy (Lkotlin/jvm/functions/Function4;Lkotlinx/coroutines/flow/MutableSharedFlow;Lcom/eygraber/vice/ViceCompositor;Ljava/util/List;Lcom/eygraber/vice/ViceEffects;)Lcom/eygraber/vice/ViceArgs;
+	public static synthetic fun copy$default (Lcom/eygraber/vice/ViceArgs;Lkotlin/jvm/functions/Function4;Lkotlinx/coroutines/flow/MutableSharedFlow;Lcom/eygraber/vice/ViceCompositor;Ljava/util/List;Lcom/eygraber/vice/ViceEffects;ILjava/lang/Object;)Lcom/eygraber/vice/ViceArgs;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCompositor ()Lcom/eygraber/vice/ViceCompositor;
+	public final fun getEffects ()Lcom/eygraber/vice/ViceEffects;
+	public final fun getIntentFilters ()Ljava/util/List;
+	public final fun getIntents ()Lkotlinx/coroutines/flow/MutableSharedFlow;
+	public final fun getView ()Lkotlin/jvm/functions/Function4;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/eygraber/vice/ViceCompositor {
+	public abstract fun composite (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	public abstract fun onIntent (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/eygraber/vice/ViceContainer {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> ([Lcom/eygraber/vice/filter/ViceIntentFilter;Lkotlinx/coroutines/flow/SharedFlow;)V
+	public synthetic fun <init> ([Lcom/eygraber/vice/filter/ViceIntentFilter;Lkotlinx/coroutines/flow/SharedFlow;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun Vice (Landroidx/compose/runtime/Composer;I)V
+	public abstract fun getCompositor ()Lcom/eygraber/vice/ViceCompositor;
+	public abstract fun getEffects ()Lcom/eygraber/vice/ViceEffects;
+	public abstract fun getView ()Lkotlin/jvm/functions/Function4;
+}
+
+public final class com/eygraber/vice/ViceContainerKt {
+	public static final fun Vice (Lcom/eygraber/vice/ViceArgs;Landroidx/compose/runtime/Composer;I)V
+}
+
+public abstract interface class com/eygraber/vice/ViceEffects {
+	public static final field Companion Lcom/eygraber/vice/ViceEffects$Companion;
+	public fun getDispatcher ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public abstract fun runEffects (Lkotlinx/coroutines/CoroutineScope;)V
+}
+
+public final class com/eygraber/vice/ViceEffects$Companion {
+	public final fun getNone ()Lcom/eygraber/vice/ViceEffects;
+}
+
+public final class com/eygraber/vice/ViceEffects$DefaultImpls {
+	public static fun getDispatcher (Lcom/eygraber/vice/ViceEffects;)Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public abstract interface class com/eygraber/vice/ViceSource {
+	public abstract fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+}
+
+public final class com/eygraber/vice/ViceSourceKt {
+	public static final fun ViceSource (Lkotlin/jvm/functions/Function2;)Lcom/eygraber/vice/ViceSource;
+}
+
+public abstract interface class com/eygraber/vice/filter/ThrottlingIntent {
+	public fun getInterval-UwyO8pc ()J
+	public fun key ()Ljava/lang/Object;
+}
+
+public final class com/eygraber/vice/filter/ThrottlingIntent$DefaultImpls {
+	public static fun getInterval-UwyO8pc (Lcom/eygraber/vice/filter/ThrottlingIntent;)J
+	public static fun key (Lcom/eygraber/vice/filter/ThrottlingIntent;)Ljava/lang/Object;
+}
+
+public final class com/eygraber/vice/filter/ThrottlingIntentFilter : com/eygraber/vice/filter/ViceIntentFilter {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lkotlin/time/TimeSource$WithComparableMarks;)V
+	public synthetic fun <init> (Lkotlin/time/TimeSource$WithComparableMarks;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun filter (Ljava/lang/Object;)Z
+}
+
+public abstract interface class com/eygraber/vice/filter/ViceIntentFilter {
+	public abstract fun filter (Ljava/lang/Object;)Z
+}
+

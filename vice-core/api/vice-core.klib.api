@@ -1,0 +1,93 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.eygraber:vice-core>
+abstract interface <#A: kotlin/Any?, #B: kotlin/Any?> com.eygraber.vice/ViceCompositor { // com.eygraber.vice/ViceCompositor|null[0]
+    abstract fun composite(androidx.compose.runtime/Composer?, kotlin/Int): #B // com.eygraber.vice/ViceCompositor.composite|composite(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+    abstract suspend fun onIntent(#A) // com.eygraber.vice/ViceCompositor.onIntent|onIntent(1:0){}[0]
+}
+
+abstract interface <#A: kotlin/Any?> com.eygraber.vice/ViceSource { // com.eygraber.vice/ViceSource|null[0]
+    abstract fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice/ViceSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+abstract interface com.eygraber.vice.filter/ThrottlingIntent { // com.eygraber.vice.filter/ThrottlingIntent|null[0]
+    open val interval // com.eygraber.vice.filter/ThrottlingIntent.interval|{}interval[0]
+        open fun <get-interval>(): kotlin.time/Duration // com.eygraber.vice.filter/ThrottlingIntent.interval.<get-interval>|<get-interval>(){}[0]
+
+    open fun key(): kotlin/Any // com.eygraber.vice.filter/ThrottlingIntent.key|key(){}[0]
+}
+
+abstract interface com.eygraber.vice.filter/ViceIntentFilter { // com.eygraber.vice.filter/ViceIntentFilter|null[0]
+    abstract fun filter(kotlin/Any): kotlin/Boolean // com.eygraber.vice.filter/ViceIntentFilter.filter|filter(kotlin.Any){}[0]
+}
+
+abstract interface com.eygraber.vice/ViceEffects { // com.eygraber.vice/ViceEffects|null[0]
+    open val dispatcher // com.eygraber.vice/ViceEffects.dispatcher|{}dispatcher[0]
+        open fun <get-dispatcher>(): kotlinx.coroutines/CoroutineDispatcher // com.eygraber.vice/ViceEffects.dispatcher.<get-dispatcher>|<get-dispatcher>(){}[0]
+
+    abstract fun (kotlinx.coroutines/CoroutineScope).runEffects() // com.eygraber.vice/ViceEffects.runEffects|runEffects@kotlinx.coroutines.CoroutineScope(){}[0]
+
+    final object Companion { // com.eygraber.vice/ViceEffects.Companion|null[0]
+        final val None // com.eygraber.vice/ViceEffects.Companion.None|{}None[0]
+            final fun <get-None>(): com.eygraber.vice/ViceEffects // com.eygraber.vice/ViceEffects.Companion.None.<get-None>|<get-None>(){}[0]
+    }
+}
+
+abstract class <#A: kotlin/Any, #B: com.eygraber.vice/ViceCompositor<#A, #D>, #C: com.eygraber.vice/ViceEffects, #D: kotlin/Any> com.eygraber.vice/ViceContainer { // com.eygraber.vice/ViceContainer|null[0]
+    constructor <init>(kotlin/Array<out com.eygraber.vice.filter/ViceIntentFilter>... = ..., kotlinx.coroutines.flow/SharedFlow<#A> = ...) // com.eygraber.vice/ViceContainer.<init>|<init>(kotlin.Array<out|com.eygraber.vice.filter.ViceIntentFilter>...;kotlinx.coroutines.flow.SharedFlow<1:0>){}[0]
+
+    abstract val compositor // com.eygraber.vice/ViceContainer.compositor|{}compositor[0]
+        abstract fun <get-compositor>(): #B // com.eygraber.vice/ViceContainer.compositor.<get-compositor>|<get-compositor>(){}[0]
+    abstract val effects // com.eygraber.vice/ViceContainer.effects|{}effects[0]
+        abstract fun <get-effects>(): #C // com.eygraber.vice/ViceContainer.effects.<get-effects>|<get-effects>(){}[0]
+    abstract val view // com.eygraber.vice/ViceContainer.view|{}view[0]
+        abstract fun <get-view>(): kotlin/Function4<#D, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> // com.eygraber.vice/ViceContainer.view.<get-view>|<get-view>(){}[0]
+
+    final fun Vice(androidx.compose.runtime/Composer?, kotlin/Int) // com.eygraber.vice/ViceContainer.Vice|Vice(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
+}
+
+final class <#A: kotlin/Any, #B: kotlin/Any> com.eygraber.vice/ViceArgs { // com.eygraber.vice/ViceArgs|null[0]
+    constructor <init>(kotlin/Function4<#B, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>, kotlinx.coroutines.flow/MutableSharedFlow<#A>, com.eygraber.vice/ViceCompositor<#A, #B>, kotlin.collections/List<com.eygraber.vice.filter/ViceIntentFilter>, com.eygraber.vice/ViceEffects) // com.eygraber.vice/ViceArgs.<init>|<init>(kotlin.Function4<1:1,kotlin.Function1<1:0,kotlin.Unit>,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;kotlinx.coroutines.flow.MutableSharedFlow<1:0>;com.eygraber.vice.ViceCompositor<1:0,1:1>;kotlin.collections.List<com.eygraber.vice.filter.ViceIntentFilter>;com.eygraber.vice.ViceEffects){}[0]
+
+    final val compositor // com.eygraber.vice/ViceArgs.compositor|{}compositor[0]
+        final fun <get-compositor>(): com.eygraber.vice/ViceCompositor<#A, #B> // com.eygraber.vice/ViceArgs.compositor.<get-compositor>|<get-compositor>(){}[0]
+    final val effects // com.eygraber.vice/ViceArgs.effects|{}effects[0]
+        final fun <get-effects>(): com.eygraber.vice/ViceEffects // com.eygraber.vice/ViceArgs.effects.<get-effects>|<get-effects>(){}[0]
+    final val intentFilters // com.eygraber.vice/ViceArgs.intentFilters|{}intentFilters[0]
+        final fun <get-intentFilters>(): kotlin.collections/List<com.eygraber.vice.filter/ViceIntentFilter> // com.eygraber.vice/ViceArgs.intentFilters.<get-intentFilters>|<get-intentFilters>(){}[0]
+    final val intents // com.eygraber.vice/ViceArgs.intents|{}intents[0]
+        final fun <get-intents>(): kotlinx.coroutines.flow/MutableSharedFlow<#A> // com.eygraber.vice/ViceArgs.intents.<get-intents>|<get-intents>(){}[0]
+    final val view // com.eygraber.vice/ViceArgs.view|{}view[0]
+        final fun <get-view>(): kotlin/Function4<#B, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> // com.eygraber.vice/ViceArgs.view.<get-view>|<get-view>(){}[0]
+
+    final fun component1(): kotlin/Function4<#B, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> // com.eygraber.vice/ViceArgs.component1|component1(){}[0]
+    final fun component2(): kotlinx.coroutines.flow/MutableSharedFlow<#A> // com.eygraber.vice/ViceArgs.component2|component2(){}[0]
+    final fun component3(): com.eygraber.vice/ViceCompositor<#A, #B> // com.eygraber.vice/ViceArgs.component3|component3(){}[0]
+    final fun component4(): kotlin.collections/List<com.eygraber.vice.filter/ViceIntentFilter> // com.eygraber.vice/ViceArgs.component4|component4(){}[0]
+    final fun component5(): com.eygraber.vice/ViceEffects // com.eygraber.vice/ViceArgs.component5|component5(){}[0]
+    final fun copy(kotlin/Function4<#B, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit> = ..., kotlinx.coroutines.flow/MutableSharedFlow<#A> = ..., com.eygraber.vice/ViceCompositor<#A, #B> = ..., kotlin.collections/List<com.eygraber.vice.filter/ViceIntentFilter> = ..., com.eygraber.vice/ViceEffects = ...): com.eygraber.vice/ViceArgs<#A, #B> // com.eygraber.vice/ViceArgs.copy|copy(kotlin.Function4<1:1,kotlin.Function1<1:0,kotlin.Unit>,androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>;kotlinx.coroutines.flow.MutableSharedFlow<1:0>;com.eygraber.vice.ViceCompositor<1:0,1:1>;kotlin.collections.List<com.eygraber.vice.filter.ViceIntentFilter>;com.eygraber.vice.ViceEffects){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.eygraber.vice/ViceArgs.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.eygraber.vice/ViceArgs.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.eygraber.vice/ViceArgs.toString|toString(){}[0]
+}
+
+final class com.eygraber.vice.filter/ThrottlingIntentFilter : com.eygraber.vice.filter/ViceIntentFilter { // com.eygraber.vice.filter/ThrottlingIntentFilter|null[0]
+    constructor <init>(kotlin.time/TimeSource.WithComparableMarks = ...) // com.eygraber.vice.filter/ThrottlingIntentFilter.<init>|<init>(kotlin.time.TimeSource.WithComparableMarks){}[0]
+
+    final fun filter(kotlin/Any): kotlin/Boolean // com.eygraber.vice.filter/ThrottlingIntentFilter.filter|filter(kotlin.Any){}[0]
+}
+
+final val com.eygraber.vice.filter/com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop // com.eygraber.vice.filter/com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop|#static{}com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop[0]
+final val com.eygraber.vice/com_eygraber_vice_ViceArgs$stableprop // com.eygraber.vice/com_eygraber_vice_ViceArgs$stableprop|#static{}com_eygraber_vice_ViceArgs$stableprop[0]
+final val com.eygraber.vice/com_eygraber_vice_ViceContainer$stableprop // com.eygraber.vice/com_eygraber_vice_ViceContainer$stableprop|#static{}com_eygraber_vice_ViceContainer$stableprop[0]
+
+final fun <#A: kotlin/Any, #B: kotlin/Any> com.eygraber.vice/Vice(com.eygraber.vice/ViceArgs<#A, #B>, androidx.compose.runtime/Composer?, kotlin/Int) // com.eygraber.vice/Vice|Vice(com.eygraber.vice.ViceArgs<0:0,0:1>;androidx.compose.runtime.Composer?;kotlin.Int){0§<kotlin.Any>;1§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any?> com.eygraber.vice/ViceSource(kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, #A>): com.eygraber.vice/ViceSource<#A> // com.eygraber.vice/ViceSource|ViceSource(kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,0:0>){0§<kotlin.Any?>}[0]
+final fun com.eygraber.vice.filter/com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop_getter(): kotlin/Int // com.eygraber.vice.filter/com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop_getter|com_eygraber_vice_filter_ThrottlingIntentFilter$stableprop_getter(){}[0]
+final fun com.eygraber.vice/com_eygraber_vice_ViceArgs$stableprop_getter(): kotlin/Int // com.eygraber.vice/com_eygraber_vice_ViceArgs$stableprop_getter|com_eygraber_vice_ViceArgs$stableprop_getter(){}[0]
+final fun com.eygraber.vice/com_eygraber_vice_ViceContainer$stableprop_getter(): kotlin/Int // com.eygraber.vice/com_eygraber_vice_ViceContainer$stableprop_getter|com_eygraber_vice_ViceContainer$stableprop_getter(){}[0]

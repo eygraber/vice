@@ -1,0 +1,6 @@
+public abstract class com/eygraber/vice/portal/VicePortal : com/eygraber/vice/ViceContainer, com/eygraber/portal/compose/ComposePortal {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun Render (Landroidx/compose/runtime/Composer;I)V
+}
+
