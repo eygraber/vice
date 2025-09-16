@@ -5,7 +5,7 @@ android-sdk-compile = "36"
 android-sdk-target = "36"
 android-sdk-min = "24"
 
-composeJetbrains = "1.8.2"
+composeJetbrains = "1.9.0"
 composeLifecycle = "2.9.4"
 composeNav3 = "1.0.0-alpha09"
 
