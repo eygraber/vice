@@ -10,8 +10,8 @@ public final class com/eygraber/vice/nav3/LocalSharedTransitionScopeKt {
 public final class com/eygraber/vice/nav3/ViceNavEntryKt {
 	public static final fun ViceNavEntry (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Landroidx/navigation3/runtime/NavEntry;
 	public static synthetic fun ViceNavEntry$default (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Landroidx/navigation3/runtime/NavEntry;
-	public static final fun viceEntry (Landroidx/navigation3/runtime/EntryProviderBuilder;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
-	public static synthetic fun viceEntry$default (Landroidx/navigation3/runtime/EntryProviderBuilder;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+	public static final fun viceEntry (Landroidx/navigation3/runtime/EntryProviderScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun viceEntry$default (Landroidx/navigation3/runtime/EntryProviderScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
 }
 
 public abstract class com/eygraber/vice/nav3/ViceNavEntryProvider {

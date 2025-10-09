@@ -1,7 +1,7 @@
 package com.eygraber.vice.nav3
 
 import androidx.compose.runtime.remember
-import androidx.navigation3.runtime.EntryProviderBuilder
+import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavEntry
 import com.eygraber.vice.Vice
 import com.eygraber.vice.ViceArgs
@@ -47,7 +47,7 @@ public fun <T, I, C, E, S> ViceNavEntry(
     },
   )
 
-public inline fun <reified T : Any> EntryProviderBuilder<in T>.viceEntry(
+public inline fun <reified T : Any> EntryProviderScope<in T>.viceEntry(
   crossinline entryProvider: (T) -> ViceNavEntryProvider<T, *, *, *, *>,
   noinline clazzContentKey: (key: @JvmSuppressWildcards T) -> Any = { it.toString() },
   metadata: Map<String, Any> = emptyMap(),
@@ -96,7 +96,7 @@ public abstract class ViceNavEntryProvider<T, I, C, E, S>(
   )
 }
 
-public fun <T, I, C, E, S> EntryProviderBuilder<T>.viceEntry(
+public fun <T, I, C, E, S> EntryProviderScope<T>.viceEntry(
   key: T,
   viewProvider: () -> ViceView<I, S>,
   compositorProvider: () -> C,
