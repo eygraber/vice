@@ -9,7 +9,7 @@ composeJetbrains = "1.9.1"
 composeLifecycle = "2.9.5"
 composeNav3 = "1.0.0-beta01"
 
-conventions = "0.0.88"
+conventions = "0.0.89"
 
 detekt = "1.23.8"
 detektEygraber = "1.0.12"
