@@ -29,6 +29,7 @@ kotlin {
 
         implementation(compose.material3)
         api(libs.compose.materialIcons)
+        api(libs.compose.nav3.ui)
 
         implementation(libs.kotlinx.coroutines.core)
         implementation(libs.kotlinx.serialization.json)

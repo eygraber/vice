@@ -12,6 +12,7 @@ import com.eygraber.vice.filter.ThrottlingIntentFilter
 import com.eygraber.vice.filter.ViceIntentFilter
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlin.jvm.JvmSuppressWildcards
 
 @Suppress("FunctionName")
 public fun <T, I, C, E, S> ViceNavEntry(
