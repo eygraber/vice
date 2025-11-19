@@ -1,0 +1,30 @@
+public final class com/eygraber/vice/nav3/LocalSharedTransitionScopeKt {
+	public static final fun getLocalSharedTransitionScope ()Landroidx/compose/runtime/ProvidableCompositionLocal;
+	public static final fun rememberSharedContentState (Ljava/lang/Object;Landroidx/compose/runtime/Composer;I)Landroidx/compose/animation/SharedTransitionScope$SharedContentState;
+	public static final fun sharedBounds (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/EnterTransition;Landroidx/compose/animation/ExitTransition;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$ResizeMode;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun sharedBounds$default (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/EnterTransition;Landroidx/compose/animation/ExitTransition;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$ResizeMode;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun sharedElement (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun sharedElement$default (Landroidx/compose/ui/Modifier;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/AnimatedVisibilityScope;Landroidx/compose/animation/SharedTransitionScope$SharedContentState;Landroidx/compose/animation/BoundsTransform;Landroidx/compose/animation/SharedTransitionScope$PlaceHolderSize;ZFLandroidx/compose/animation/SharedTransitionScope$OverlayClip;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class com/eygraber/vice/nav3/ViceNavEntryKt {
+	public static final fun ViceNavEntry (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Landroidx/navigation3/runtime/NavEntry;
+	public static synthetic fun ViceNavEntry$default (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Landroidx/navigation3/runtime/NavEntry;
+	public static final fun viceEntry (Landroidx/navigation3/runtime/EntryProviderScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun viceEntry$default (Landroidx/navigation3/runtime/EntryProviderScope;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Ljava/util/Map;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+}
+
+public abstract class com/eygraber/vice/nav3/ViceNavEntryProvider {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Lkotlinx/coroutines/flow/SharedFlow;)V
+	public synthetic fun <init> (Ljava/util/List;Lkotlinx/coroutines/flow/SharedFlow;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun createEntry (Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Map;)Landroidx/navigation3/runtime/NavEntry;
+	public static synthetic fun createEntry$default (Lcom/eygraber/vice/nav3/ViceNavEntryProvider;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Map;ILjava/lang/Object;)Landroidx/navigation3/runtime/NavEntry;
+	public abstract fun getCompositor ()Lcom/eygraber/vice/ViceCompositor;
+	public abstract fun getEffects ()Lcom/eygraber/vice/ViceEffects;
+	public final fun getIntentFilters ()Ljava/util/List;
+	public final fun getIntents ()Lkotlinx/coroutines/flow/SharedFlow;
+	public abstract fun getView ()Lkotlin/jvm/functions/Function4;
+}
+

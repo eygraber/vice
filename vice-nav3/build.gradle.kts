@@ -13,23 +13,18 @@ android {
 }
 
 kotlin {
-  kmpTargets(
-    KmpTarget.Android,
+  defaultKmpTargets(
     project = project,
-    ignoreDefaultTargets = true,
   )
 
   sourceSets {
-    androidMain.dependencies {
-      api(libs.compose.nav3.runtime)
-      api(libs.compose.nav3.ui)
-    }
-
     commonMain.dependencies {
       api(projects.viceCore)
 
       implementation(compose.animation)
       implementation(compose.runtime)
+
+      api(libs.compose.nav3.runtime)
 
       implementation(libs.kotlinx.coroutines.core)
     }
