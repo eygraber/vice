@@ -22,7 +22,7 @@ kotlin {
       dependencies {
         api(projects.viceCore)
 
-        implementation(compose.runtime)
+        implementation(libs.compose.runtime)
 
         implementation(libs.kotlinx.coroutines.core)
 

@@ -27,7 +27,7 @@ kotlin {
         implementation(projects.samples.shared)
         implementation(projects.viceNav3)
 
-        implementation(compose.material3)
+        implementation(libs.compose.material3)
         api(libs.compose.materialIcons)
         api(libs.compose.nav3.ui)
 

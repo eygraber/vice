@@ -21,11 +21,10 @@ kotlin {
     commonMain.dependencies {
       api(projects.viceNav)
 
+      implementation(libs.compose.material3)
       api(libs.compose.navigation)
       api(libs.compose.navigationMaterial3)
-
-      implementation(compose.material3)
-      implementation(compose.runtime)
+      implementation(libs.compose.runtime)
     }
   }
 

@@ -22,9 +22,10 @@ kotlin {
       dependencies {
         api(projects.viceCore)
 
-        implementation(libs.compose.lifecycle)
-        api(compose.runtime)
-        api(compose.runtimeSaveable)
+        api(libs.compose.runtime)
+        api(libs.compose.runtimeSaveable)
+
+        implementation(libs.lifecycle.compose)
 
         api(libs.kotlinx.coroutines.core)
       }
