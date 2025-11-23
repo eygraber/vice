@@ -1,3 +1,4 @@
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
@@ -32,8 +33,18 @@ kotlin {
 
     commonTest {
       dependencies {
-        implementation(kotlin("test-common"))
-        implementation(kotlin("test-annotations-common"))
+        implementation(kotlin("test"))
+      }
+    }
+
+    jvmTest {
+      dependencies {
+        implementation(compose.desktop.currentOs)
+
+        implementation(compose.foundation)
+
+        @OptIn(ExperimentalComposeLibrary::class)
+        implementation(compose.uiTest)
       }
     }
   }
