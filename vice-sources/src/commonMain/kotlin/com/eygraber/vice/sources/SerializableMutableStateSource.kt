@@ -3,14 +3,14 @@ package com.eygraber.vice.sources
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSerializable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.KSerializer
 
-public abstract class SaveableMutableStateSource<T : Any>(
-  private val saver: Saver<T, out Any>? = null,
+public abstract class SerializableMutableStateSource<T : Any>(
+  private val stateSerializer: KSerializer<T>,
 ) : StateSource<T> {
   private var stateOfState by mutableStateOf(mutableStateOf(initial))
 
@@ -26,9 +26,8 @@ public abstract class SaveableMutableStateSource<T : Any>(
 
   @Composable
   override fun currentState(): T {
-    val rememberedState = when(saver) {
-      null -> rememberSaveable { mutableStateOf(initial) }
-      else -> rememberSaveable(stateSaver = saver) { mutableStateOf(initial) }
+    val rememberedState = rememberSerializable(stateSerializer = stateSerializer) {
+      mutableStateOf(initial)
     }
     stateOfState = rememberedState
     return stateOfState.value

@@ -100,6 +100,16 @@ public abstract class com/eygraber/vice/sources/SaveableMutableStateSource : com
 	protected final fun update (Ljava/lang/Object;)V
 }
 
+public abstract class com/eygraber/vice/sources/SerializableMutableStateSource : com/eygraber/vice/sources/StateSource {
+	public static final field $stable I
+	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
+	protected abstract fun getInitial ()Ljava/lang/Object;
+	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
+	public fun getValue ()Ljava/lang/Object;
+	protected final fun update (Ljava/lang/Object;)V
+}
+
 public abstract class com/eygraber/vice/sources/StateFlowSource : com/eygraber/vice/ViceSource {
 	public static final field $stable I
 	public fun <init> ()V
