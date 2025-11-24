@@ -1,6 +1,7 @@
 package com.eygraber.vice.sources
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableFloatStateOf
@@ -30,6 +31,7 @@ public fun <T> mutableViceSource(
   }
 
   @Composable
+  @ReadOnlyComposable
   override fun currentState(): T = state
 }
 
@@ -77,7 +79,20 @@ public inline fun <reified T : Any> serializableMutableViceSource(
 
 public fun mutableDoubleSource(
   initial: Double,
-  isSaveable: Boolean = false,
+): MutableViceSource<Double> = object : MutableViceSource<Double> {
+  private var state by mutableDoubleStateOf(initial)
+
+  override fun update(value: Double) {
+    state = value
+  }
+
+  @Composable
+  @ReadOnlyComposable
+  override fun currentState(): Double = state
+}
+
+public fun saveableMutableDoubleSource(
+  initial: Double,
 ): MutableViceSource<Double> = object : MutableViceSource<Double> {
   private var state = mutableDoubleStateOf(initial)
 
@@ -86,19 +101,28 @@ public fun mutableDoubleSource(
   }
 
   @Composable
-  override fun currentState(): Double =
-    if(isSaveable) {
-      state = rememberSaveable { state }
-      state.doubleValue
-    }
-    else {
-      state.doubleValue
-    }
+  override fun currentState(): Double {
+    state = rememberSaveable { state }
+    return state.doubleValue
+  }
 }
 
 public fun mutableFloatSource(
   initial: Float,
-  isSaveable: Boolean = false,
+): MutableViceSource<Float> = object : MutableViceSource<Float> {
+  private var state by mutableFloatStateOf(initial)
+
+  override fun update(value: Float) {
+    state = value
+  }
+
+  @Composable
+  @ReadOnlyComposable
+  override fun currentState(): Float = state
+}
+
+public fun saveableMutableFloatSource(
+  initial: Float,
 ): MutableViceSource<Float> = object : MutableViceSource<Float> {
   private var state = mutableFloatStateOf(initial)
 
@@ -107,19 +131,28 @@ public fun mutableFloatSource(
   }
 
   @Composable
-  override fun currentState(): Float =
-    if(isSaveable) {
-      state = rememberSaveable { state }
-      state.floatValue
-    }
-    else {
-      state.floatValue
-    }
+  override fun currentState(): Float {
+    state = rememberSaveable { state }
+    return state.floatValue
+  }
 }
 
 public fun mutableIntSource(
   initial: Int,
-  isSaveable: Boolean = false,
+): MutableViceSource<Int> = object : MutableViceSource<Int> {
+  private var state by mutableIntStateOf(initial)
+
+  override fun update(value: Int) {
+    state = value
+  }
+
+  @Composable
+  @ReadOnlyComposable
+  override fun currentState(): Int = state
+}
+
+public fun saveableMutableIntSource(
+  initial: Int,
 ): MutableViceSource<Int> = object : MutableViceSource<Int> {
   private var state = mutableIntStateOf(initial)
 
@@ -128,19 +161,28 @@ public fun mutableIntSource(
   }
 
   @Composable
-  override fun currentState(): Int =
-    if(isSaveable) {
-      state = rememberSaveable { state }
-      state.intValue
-    }
-    else {
-      state.intValue
-    }
+  override fun currentState(): Int {
+    state = rememberSaveable { state }
+    return state.intValue
+  }
 }
 
 public fun mutableLongSource(
   initial: Long,
-  isSaveable: Boolean = false,
+): MutableViceSource<Long> = object : MutableViceSource<Long> {
+  private var state by mutableLongStateOf(initial)
+
+  override fun update(value: Long) {
+    state = value
+  }
+
+  @Composable
+  @ReadOnlyComposable
+  override fun currentState(): Long = state
+}
+
+public fun saveableMutableLongSource(
+  initial: Long,
 ): MutableViceSource<Long> = object : MutableViceSource<Long> {
   private var state = mutableLongStateOf(initial)
 
@@ -149,12 +191,8 @@ public fun mutableLongSource(
   }
 
   @Composable
-  override fun currentState(): Long =
-    if(isSaveable) {
-      state = rememberSaveable { state }
-      state.longValue
-    }
-    else {
-      state.longValue
-    }
+  override fun currentState(): Long {
+    state = rememberSaveable { state }
+    return state.longValue
+  }
 }

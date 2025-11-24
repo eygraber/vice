@@ -101,15 +101,15 @@ public abstract interface class com/eygraber/vice/sources/MutableViceSource : co
 }
 
 public final class com/eygraber/vice/sources/MutableViceSourceKt {
-	public static final fun mutableDoubleSource (DZ)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static synthetic fun mutableDoubleSource$default (DZILjava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static final fun mutableFloatSource (FZ)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static synthetic fun mutableFloatSource$default (FZILjava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static final fun mutableIntSource (IZ)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static synthetic fun mutableIntSource$default (IZILjava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static final fun mutableLongSource (JZ)Lcom/eygraber/vice/sources/MutableViceSource;
-	public static synthetic fun mutableLongSource$default (JZILjava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun mutableDoubleSource (D)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun mutableFloatSource (F)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun mutableIntSource (I)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun mutableLongSource (J)Lcom/eygraber/vice/sources/MutableViceSource;
 	public static final fun mutableViceSource (Ljava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun saveableMutableDoubleSource (D)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun saveableMutableFloatSource (F)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun saveableMutableIntSource (I)Lcom/eygraber/vice/sources/MutableViceSource;
+	public static final fun saveableMutableLongSource (J)Lcom/eygraber/vice/sources/MutableViceSource;
 	public static final fun saveableMutableViceSource (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;)Lcom/eygraber/vice/sources/MutableViceSource;
 	public static synthetic fun saveableMutableViceSource$default (Ljava/lang/Object;Landroidx/compose/runtime/saveable/Saver;ILjava/lang/Object;)Lcom/eygraber/vice/sources/MutableViceSource;
 }

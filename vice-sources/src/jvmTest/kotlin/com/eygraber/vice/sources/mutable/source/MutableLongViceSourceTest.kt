@@ -7,6 +7,7 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.runComposeUiTest
 import com.eygraber.vice.sources.ViceStateRestorationTester
 import com.eygraber.vice.sources.mutableLongSource
+import com.eygraber.vice.sources.saveableMutableLongSource
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -88,11 +89,11 @@ class MutableLongViceSourceTest {
 
   @Test
   fun `test that saveable mutable long source is retained across recreation`() = runComposeUiTest {
-    var source = mutableLongSource(1L, isSaveable = true)
+    var source = saveableMutableLongSource(1L)
     val values = mutableListOf<Long>()
     val restorationTester = ViceStateRestorationTester(
       composeTest = this,
-      onDisposedAction = { source = mutableLongSource(1L, isSaveable = true) },
+      onDisposedAction = { source = saveableMutableLongSource(1L) },
     )
     val disposedValues = mutableListOf<Boolean>()
 
