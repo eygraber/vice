@@ -9,8 +9,9 @@ import kotlinx.serialization.KSerializer
 
 public abstract class SerializableMutableStateSource<T : Any>(
   private val stateSerializer: KSerializer<T>,
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
 ) : StateSource<T> {
-  private val stateOfState by lazy {
+  private val stateOfState by lazy(initializationThreadSafetyMode) {
     mutableStateOf(mutableStateOf(initial))
   }
 

@@ -9,8 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 public abstract class SaveableMutableStateSource<T : Any>(
   private val saver: Saver<T, out Any>? = null,
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
 ) : StateSource<T> {
-  private val stateOfState by lazy {
+  private val stateOfState by lazy(initializationThreadSafetyMode) {
     mutableStateOf(mutableStateOf(initial))
   }
 

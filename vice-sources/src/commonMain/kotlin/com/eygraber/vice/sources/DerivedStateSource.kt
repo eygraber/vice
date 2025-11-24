@@ -6,10 +6,12 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.Flow
 
-public abstract class DerivedStateSource<T> : StateSource<T> {
+public abstract class DerivedStateSource<T>(
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
+) : StateSource<T> {
   protected abstract fun deriveState(): T
 
-  private val state by lazy {
+  private val state by lazy(initializationThreadSafetyMode) {
     derivedStateOf(::deriveState)
   }
 
