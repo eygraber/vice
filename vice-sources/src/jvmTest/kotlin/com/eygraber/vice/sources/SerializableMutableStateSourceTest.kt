@@ -3,8 +3,11 @@ package com.eygraber.vice.sources
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
 import androidx.compose.runtime.saveable.SaveableStateRegistry
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.runComposeUiTest
+import app.cash.turbine.test
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -12,12 +15,30 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalTestApi::class)
 class SerializableMutableStateSourceTest {
   @Test
   fun `test that initial value is the correct value`() {
     assert(ComplexSource().value == ComplexData(1))
+  }
+
+  @Test
+  fun `test that updates work correctly`() = runTest {
+    val source = ComplexSource(initial = ComplexData(0))
+
+    source.updates.test {
+      repeat(5) { index ->
+        assertEquals(index, awaitItem().data)
+
+        Snapshot.withMutableSnapshot {
+          source.increment()
+        }
+      }
+
+      assertEquals(5, awaitItem().data)
+    }
   }
 
   @Test
@@ -48,9 +69,12 @@ class SerializableMutableStateSourceTest {
 
   @Test
   fun `test that complex serializable mutable state source works across recreation`() = runComposeUiTest {
-    val complexSource = ComplexSource()
+    var complexSource = ComplexSource()
     val values = mutableSetOf<ComplexData>()
-    val restorationTester = ViceStateRestorationTester(this)
+    val restorationTester = ViceStateRestorationTester(
+      composeTest = this,
+      onDisposedAction = { complexSource = ComplexSource() },
+    )
     val disposedValues = mutableListOf<Boolean>()
 
     LocalSaveableStateRegistry.providesDefault(
@@ -91,7 +115,9 @@ class SerializableMutableStateSourceTest {
 
   private data class ComplexData(val data: Int)
 
-  private class ComplexSource : SerializableMutableStateSource<ComplexData>(
+  private class ComplexSource(
+    override val initial: ComplexData = ComplexData(1),
+  ) : SerializableMutableStateSource<ComplexData>(
     stateSerializer = object : KSerializer<ComplexData> {
       override val descriptor: SerialDescriptor = Int.serializer().descriptor
 
@@ -107,8 +133,6 @@ class SerializableMutableStateSourceTest {
       ) = ComplexData(decoder.decodeInt())
     },
   ) {
-    override val initial: ComplexData = ComplexData(1)
-
     fun increment() {
       update(ComplexData(value.data + 1))
     }

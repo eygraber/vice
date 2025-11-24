@@ -45,6 +45,9 @@ kotlin {
 
         @OptIn(ExperimentalComposeLibrary::class)
         implementation(compose.uiTest)
+
+        implementation(libs.test.kotlinx.coroutines)
+        implementation(libs.test.turbine)
       }
     }
   }

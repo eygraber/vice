@@ -12,7 +12,10 @@ import androidx.compose.ui.test.ComposeUiTest
 import androidx.compose.ui.test.ExperimentalTestApi
 
 @ExperimentalTestApi
-class ViceStateRestorationTester(private val composeTest: ComposeUiTest) {
+class ViceStateRestorationTester(
+  private val composeTest: ComposeUiTest,
+  private val onDisposedAction: () -> Unit = {},
+) {
   private var registry: RestorationRegistry? = null
 
   /**
@@ -39,7 +42,10 @@ class ViceStateRestorationTester(private val composeTest: ComposeUiTest) {
    */
   fun emulateSaveAndRestore() {
     val registry = checkNotNull(registry) { "setContent should be called first!" }
-    composeTest.runOnIdle { registry.saveStateAndDisposeChildren() }
+    composeTest.runOnIdle {
+      registry.saveStateAndDisposeChildren()
+      onDisposedAction()
+    }
     composeTest.runOnIdle { registry.emitChildrenWithRestoredState() }
     composeTest.runOnIdle {
       // we just wait for the children to be emitted
