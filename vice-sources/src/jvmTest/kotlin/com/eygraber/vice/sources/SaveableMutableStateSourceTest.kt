@@ -12,6 +12,11 @@ import kotlin.test.assertContentEquals
 @OptIn(ExperimentalTestApi::class)
 class SaveableMutableStateSourceTest {
   @Test
+  fun `test that initial value is the correct value`() {
+    assert(SimpleSource().value == 1)
+  }
+
+  @Test
   fun `test that simple saveable mutable state source works`() = runComposeUiTest {
     val simpleSource = SimpleSource()
     val values = mutableSetOf<Int>()
