@@ -226,6 +226,53 @@ internal class RealMyFeatureDialogSource : MyFeatureDialogSource, MutableStateSo
 }
 ```
 
+### MutableViceSource
+
+`MutableViceSource` allows for imperative updates to its state. It provides an `update` function to
+change its current state. It is the foundation for several other specific `MutableViceSource` types.
+
+It is primarily meant to be used when a full implementation (e.g. `MutableStateSource`) isn't warranted,
+but a state holder is needed outside of a composable context.
+
+#### Implementations
+
+`MutableViceSource` has several implementations available, each created using a top-level function:
+
+- `mutableViceSource`
+- `saveableMutableStateSource`
+- `serializableMutableStateSource`
+
+`mutableViceSource` is the basic implementation that wraps a `MutableState`.
+
+`saveableMutableViceSource` will automatically save and restore its state across
+process death and configuration changes. You can optionally provide a custom `Saver`.
+
+`serializableMutableViceSource` uses `kotlinx.serialization` to save and restore its state.
+To use this, your state will need to be serializable.
+
+#### Example
+```kotlin
+val source = mutableViceSource("Hello")
+val saveableSource = saveableMutableViceSource(0)
+val serializableSource = serializableMutableStateSource(MyData("test"))
+```
+
+#### Primitive MutableViceSource implementations
+
+To avoid boxing, there are specific `MutableViceSource` implementations for primitive types.
+
+These can be created using the corresponding top-level functions:
+
+- `mutableIntSource(initial)`
+- `mutableLongSource(initial)`
+- `mutableFloatSource(initial)`
+- `mutableDoubleSource(initial)`
+
+To make them saveable, use the `isSaveable` parameter in their creation functions.
+```kotlin
+val source = mutableFloatSource(0F, isSaveable = true)
+```
+
 ### MutableStateSource
 
 `MutableStateSource` wraps a `MutableState`, and provides an `update` function for implementations to
@@ -268,6 +315,29 @@ internal class MyCounterSource : SaveableMutableStateSource<Int>() {
   
   fun increment() {
     update(value + 1)
+  }
+}
+```
+
+### SerializableMutableStateSource
+
+`SerializableMutableStateSource` is the same as `MutableStateSource` except it wraps its internal `State` in a
+`rememberSerializable` call.
+
+
+```kotlin
+@Serializable
+data class Counter(val count: Int)
+
+internal class MyCounterSource : SerializableMutableStateSource<Counter>() {
+  override val initial = Counter(0)
+
+  fun reset() {
+    update(Counter(0))
+  }
+  
+  fun increment() {
+    update(count.value + 1)
   }
 }
 ```

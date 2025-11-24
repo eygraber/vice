@@ -6,6 +6,10 @@
 // - Show declarations: true
 
 // Library unique name: <com.eygraber:vice-sources>
+abstract interface <#A: kotlin/Any?> com.eygraber.vice.sources/MutableViceSource : com.eygraber.vice/ViceSource<#A> { // com.eygraber.vice.sources/MutableViceSource|null[0]
+    abstract fun update(#A) // com.eygraber.vice.sources/MutableViceSource.update|update(1:0){}[0]
+}
+
 abstract interface <#A: kotlin/Any?> com.eygraber.vice.sources/StateSource : androidx.compose.runtime/State<#A>, com.eygraber.vice/ViceSource<#A> { // com.eygraber.vice.sources/StateSource|null[0]
     open fun currentState(androidx.compose.runtime/Composer?, kotlin/Int): #A // com.eygraber.vice.sources/StateSource.currentState|currentState(androidx.compose.runtime.Composer?;kotlin.Int){}[0]
 }
@@ -174,6 +178,8 @@ final val com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableSta
 final val com.eygraber.vice.sources/com_eygraber_vice_sources_SerializableMutableStateSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_SerializableMutableStateSource$stableprop|#static{}com_eygraber_vice_sources_SerializableMutableStateSource$stableprop[0]
 final val com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop // com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop|#static{}com_eygraber_vice_sources_StateFlowSource$stableprop[0]
 
+final fun <#A: kotlin/Any?> com.eygraber.vice.sources/mutableViceSource(#A): com.eygraber.vice.sources/MutableViceSource<#A> // com.eygraber.vice.sources/mutableViceSource|mutableViceSource(0:0){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> com.eygraber.vice.sources/saveableMutableViceSource(#A, androidx.compose.runtime.saveable/Saver<#A, out kotlin/Any>? = ...): com.eygraber.vice.sources/MutableViceSource<#A> // com.eygraber.vice.sources/saveableMutableViceSource|saveableMutableViceSource(0:0;androidx.compose.runtime.saveable.Saver<0:0,out|kotlin.Any>?){0§<kotlin.Any?>}[0]
 final fun com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter(): kotlin/Int // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter|com_eygraber_vice_loadable_ViceLoadable_Loaded$stableprop_getter(){}[0]
 final fun com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter(): kotlin/Int // com.eygraber.vice.loadable/com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter|com_eygraber_vice_loadable_ViceLoadable_Loading$stableprop_getter(){}[0]
 final fun com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_DerivedStateSource$stableprop_getter|com_eygraber_vice_sources_DerivedStateSource$stableprop_getter(){}[0]
@@ -184,5 +190,10 @@ final fun com.eygraber.vice.sources/com_eygraber_vice_sources_MutableStateSource
 final fun com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter|com_eygraber_vice_sources_SaveableMutableStateSource$stableprop_getter(){}[0]
 final fun com.eygraber.vice.sources/com_eygraber_vice_sources_SerializableMutableStateSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_SerializableMutableStateSource$stableprop_getter|com_eygraber_vice_sources_SerializableMutableStateSource$stableprop_getter(){}[0]
 final fun com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop_getter(): kotlin/Int // com.eygraber.vice.sources/com_eygraber_vice_sources_StateFlowSource$stableprop_getter|com_eygraber_vice_sources_StateFlowSource$stableprop_getter(){}[0]
+final fun com.eygraber.vice.sources/mutableDoubleSource(kotlin/Double, kotlin/Boolean = ...): com.eygraber.vice.sources/MutableViceSource<kotlin/Double> // com.eygraber.vice.sources/mutableDoubleSource|mutableDoubleSource(kotlin.Double;kotlin.Boolean){}[0]
+final fun com.eygraber.vice.sources/mutableFloatSource(kotlin/Float, kotlin/Boolean = ...): com.eygraber.vice.sources/MutableViceSource<kotlin/Float> // com.eygraber.vice.sources/mutableFloatSource|mutableFloatSource(kotlin.Float;kotlin.Boolean){}[0]
+final fun com.eygraber.vice.sources/mutableIntSource(kotlin/Int, kotlin/Boolean = ...): com.eygraber.vice.sources/MutableViceSource<kotlin/Int> // com.eygraber.vice.sources/mutableIntSource|mutableIntSource(kotlin.Int;kotlin.Boolean){}[0]
+final fun com.eygraber.vice.sources/mutableLongSource(kotlin/Long, kotlin/Boolean = ...): com.eygraber.vice.sources/MutableViceSource<kotlin/Long> // com.eygraber.vice.sources/mutableLongSource|mutableLongSource(kotlin.Long;kotlin.Boolean){}[0]
 final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (com.eygraber.vice.loadable/ViceLoadable<#A>).com.eygraber.vice.loadable/map(kotlin/Function1<#A, com.eygraber.vice.loadable/ViceLoadable<#B>>): com.eygraber.vice.loadable/ViceLoadable<#B> // com.eygraber.vice.loadable/map|map@com.eygraber.vice.loadable.ViceLoadable<0:0>(kotlin.Function1<0:0,com.eygraber.vice.loadable.ViceLoadable<0:1>>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
 final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (com.eygraber.vice.loadable/ViceLoadable<#A>).com.eygraber.vice.loadable/mapValue(kotlin/Function1<#A, #B>): com.eygraber.vice.loadable/ViceLoadable<#B> // com.eygraber.vice.loadable/mapValue|mapValue@com.eygraber.vice.loadable.ViceLoadable<0:0>(kotlin.Function1<0:0,0:1>){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final inline fun <#A: reified kotlin/Any> com.eygraber.vice.sources/serializableMutableViceSource(#A, kotlinx.serialization/KSerializer<#A> = ...): com.eygraber.vice.sources/MutableViceSource<#A> // com.eygraber.vice.sources/serializableMutableViceSource|serializableMutableViceSource(0:0;kotlinx.serialization.KSerializer<0:0>){0§<kotlin.Any>}[0]
