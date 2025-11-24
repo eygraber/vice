@@ -11,13 +11,15 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
 
-public abstract class LoadableSource<T> : StateSource<ViceLoadable<T>> {
+public abstract class LoadableSource<T>(
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
+) : StateSource<ViceLoadable<T>> {
   protected open val initialLoadingThreshold: Duration = 200.milliseconds
   protected open val minLoadingDuration: Duration = 1.seconds
 
   public abstract val placeholder: T
 
-  private val state by lazy {
+  private val state by lazy(initializationThreadSafetyMode) {
     mutableStateOf<ViceLoadable<T>>(ViceLoadable.Loading(placeholder))
   }
 

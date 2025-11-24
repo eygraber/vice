@@ -15,12 +15,14 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
 
 @Stable
-public abstract class LoadableFlowSource<T> : StateFlowSource<ViceLoadable<T>>() {
-  private val mutableFlow by lazy {
+public abstract class LoadableFlowSource<T>(
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
+) : StateFlowSource<ViceLoadable<T>>() {
+  private val mutableFlow by lazy(initializationThreadSafetyMode) {
     MutableStateFlow<ViceLoadable<T>>(ViceLoadable.Loading(placeholder))
   }
 
-  override val flow: StateFlow<ViceLoadable<T>> by lazy { mutableFlow }
+  override val flow: StateFlow<ViceLoadable<T>> by lazy(initializationThreadSafetyMode) { mutableFlow }
 
   protected abstract val dataFlow: Flow<T>
 

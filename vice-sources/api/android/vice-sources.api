@@ -39,6 +39,8 @@ public final class com/eygraber/vice/loadable/ViceLoadableKt {
 public abstract class com/eygraber/vice/sources/DerivedStateSource : com/eygraber/vice/sources/StateSource {
 	public static final field $stable I
 	public fun <init> ()V
+	public fun <init> (Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
 	protected abstract fun deriveState ()Ljava/lang/Object;
 	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
@@ -56,6 +58,8 @@ public abstract class com/eygraber/vice/sources/FlowSource : com/eygraber/vice/V
 public abstract class com/eygraber/vice/sources/LoadableFlowSource : com/eygraber/vice/sources/StateFlowSource {
 	public static final field $stable I
 	public fun <init> ()V
+	public fun <init> (Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	protected abstract fun getDataFlow ()Lkotlinx/coroutines/flow/Flow;
 	protected fun getFlow ()Lkotlinx/coroutines/flow/StateFlow;
 	protected fun getInitialLoadingThreshold-UwyO8pc ()J
@@ -68,6 +72,8 @@ public abstract class com/eygraber/vice/sources/LoadableFlowSource : com/eygrabe
 public abstract class com/eygraber/vice/sources/LoadableSource : com/eygraber/vice/sources/StateSource {
 	public static final field $stable I
 	public fun <init> ()V
+	public fun <init> (Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun currentState (Landroidx/compose/runtime/Composer;I)Lcom/eygraber/vice/loadable/ViceLoadable;
 	public synthetic fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
 	protected fun getInitialLoadingThreshold-UwyO8pc ()J
@@ -81,6 +87,8 @@ public abstract class com/eygraber/vice/sources/LoadableSource : com/eygraber/vi
 public abstract class com/eygraber/vice/sources/MutableStateSource : com/eygraber/vice/sources/StateSource {
 	public static final field $stable I
 	public fun <init> ()V
+	public fun <init> (Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
 	protected abstract fun getInitial ()Ljava/lang/Object;
 	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
@@ -109,8 +117,8 @@ public final class com/eygraber/vice/sources/MutableViceSourceKt {
 public abstract class com/eygraber/vice/sources/SaveableMutableStateSource : com/eygraber/vice/sources/StateSource {
 	public static final field $stable I
 	public fun <init> ()V
-	public fun <init> (Landroidx/compose/runtime/saveable/Saver;)V
-	public synthetic fun <init> (Landroidx/compose/runtime/saveable/Saver;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Landroidx/compose/runtime/saveable/Saver;Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Landroidx/compose/runtime/saveable/Saver;Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
 	protected abstract fun getInitial ()Ljava/lang/Object;
 	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
@@ -120,7 +128,8 @@ public abstract class com/eygraber/vice/sources/SaveableMutableStateSource : com
 
 public abstract class com/eygraber/vice/sources/SerializableMutableStateSource : com/eygraber/vice/sources/StateSource {
 	public static final field $stable I
-	public fun <init> (Lkotlinx/serialization/KSerializer;)V
+	public fun <init> (Lkotlinx/serialization/KSerializer;Lkotlin/LazyThreadSafetyMode;)V
+	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;Lkotlin/LazyThreadSafetyMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun currentState (Landroidx/compose/runtime/Composer;I)Ljava/lang/Object;
 	protected abstract fun getInitial ()Ljava/lang/Object;
 	public final fun getUpdates ()Lkotlinx/coroutines/flow/Flow;

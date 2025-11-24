@@ -6,8 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.Flow
 
-public abstract class MutableStateSource<T> : StateSource<T> {
-  private val state by lazy {
+public abstract class MutableStateSource<T>(
+  initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
+) : StateSource<T> {
+  private val state by lazy(initializationThreadSafetyMode) {
     mutableStateOf(initial)
   }
 

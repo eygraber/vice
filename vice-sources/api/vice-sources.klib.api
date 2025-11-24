@@ -46,7 +46,7 @@ sealed interface <#A: kotlin/Any?> com.eygraber.vice.loadable/ViceLoadable { // 
 }
 
 abstract class <#A: kotlin/Any> com.eygraber.vice.sources/SaveableMutableStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/SaveableMutableStateSource|null[0]
-    constructor <init>(androidx.compose.runtime.saveable/Saver<#A, out kotlin/Any>? = ...) // com.eygraber.vice.sources/SaveableMutableStateSource.<init>|<init>(androidx.compose.runtime.saveable.Saver<1:0,out|kotlin.Any>?){}[0]
+    constructor <init>(androidx.compose.runtime.saveable/Saver<#A, out kotlin/Any>? = ..., kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/SaveableMutableStateSource.<init>|<init>(androidx.compose.runtime.saveable.Saver<1:0,out|kotlin.Any>?;kotlin.LazyThreadSafetyMode){}[0]
 
     abstract val initial // com.eygraber.vice.sources/SaveableMutableStateSource.initial|{}initial[0]
         abstract fun <get-initial>(): #A // com.eygraber.vice.sources/SaveableMutableStateSource.initial.<get-initial>|<get-initial>(){}[0]
@@ -60,7 +60,7 @@ abstract class <#A: kotlin/Any> com.eygraber.vice.sources/SaveableMutableStateSo
 }
 
 abstract class <#A: kotlin/Any> com.eygraber.vice.sources/SerializableMutableStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/SerializableMutableStateSource|null[0]
-    constructor <init>(kotlinx.serialization/KSerializer<#A>) // com.eygraber.vice.sources/SerializableMutableStateSource.<init>|<init>(kotlinx.serialization.KSerializer<1:0>){}[0]
+    constructor <init>(kotlinx.serialization/KSerializer<#A>, kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/SerializableMutableStateSource.<init>|<init>(kotlinx.serialization.KSerializer<1:0>;kotlin.LazyThreadSafetyMode){}[0]
 
     abstract val initial // com.eygraber.vice.sources/SerializableMutableStateSource.initial|{}initial[0]
         abstract fun <get-initial>(): #A // com.eygraber.vice.sources/SerializableMutableStateSource.initial.<get-initial>|<get-initial>(){}[0]
@@ -74,7 +74,7 @@ abstract class <#A: kotlin/Any> com.eygraber.vice.sources/SerializableMutableSta
 }
 
 abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/DerivedStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/DerivedStateSource|null[0]
-    constructor <init>() // com.eygraber.vice.sources/DerivedStateSource.<init>|<init>(){}[0]
+    constructor <init>(kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/DerivedStateSource.<init>|<init>(kotlin.LazyThreadSafetyMode){}[0]
 
     final val updates // com.eygraber.vice.sources/DerivedStateSource.updates|{}updates[0]
         final fun <get-updates>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/DerivedStateSource.updates.<get-updates>|<get-updates>(){}[0]
@@ -97,7 +97,7 @@ abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/FlowSource : com.eygr
 }
 
 abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableFlowSource : com.eygraber.vice.sources/StateFlowSource<com.eygraber.vice.loadable/ViceLoadable<#A>> { // com.eygraber.vice.sources/LoadableFlowSource|null[0]
-    constructor <init>() // com.eygraber.vice.sources/LoadableFlowSource.<init>|<init>(){}[0]
+    constructor <init>(kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/LoadableFlowSource.<init>|<init>(kotlin.LazyThreadSafetyMode){}[0]
 
     abstract val dataFlow // com.eygraber.vice.sources/LoadableFlowSource.dataFlow|{}dataFlow[0]
         abstract fun <get-dataFlow>(): kotlinx.coroutines.flow/Flow<#A> // com.eygraber.vice.sources/LoadableFlowSource.dataFlow.<get-dataFlow>|<get-dataFlow>(){}[0]
@@ -116,7 +116,7 @@ abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableFlowSource : 
 }
 
 abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableSource : com.eygraber.vice.sources/StateSource<com.eygraber.vice.loadable/ViceLoadable<#A>> { // com.eygraber.vice.sources/LoadableSource|null[0]
-    constructor <init>() // com.eygraber.vice.sources/LoadableSource.<init>|<init>(){}[0]
+    constructor <init>(kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/LoadableSource.<init>|<init>(kotlin.LazyThreadSafetyMode){}[0]
 
     abstract val placeholder // com.eygraber.vice.sources/LoadableSource.placeholder|{}placeholder[0]
         abstract fun <get-placeholder>(): #A // com.eygraber.vice.sources/LoadableSource.placeholder.<get-placeholder>|<get-placeholder>(){}[0]
@@ -132,7 +132,7 @@ abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/LoadableSource : com.
 }
 
 abstract class <#A: kotlin/Any?> com.eygraber.vice.sources/MutableStateSource : com.eygraber.vice.sources/StateSource<#A> { // com.eygraber.vice.sources/MutableStateSource|null[0]
-    constructor <init>() // com.eygraber.vice.sources/MutableStateSource.<init>|<init>(){}[0]
+    constructor <init>(kotlin/LazyThreadSafetyMode = ...) // com.eygraber.vice.sources/MutableStateSource.<init>|<init>(kotlin.LazyThreadSafetyMode){}[0]
 
     abstract val initial // com.eygraber.vice.sources/MutableStateSource.initial|{}initial[0]
         abstract fun <get-initial>(): #A // com.eygraber.vice.sources/MutableStateSource.initial.<get-initial>|<get-initial>(){}[0]
