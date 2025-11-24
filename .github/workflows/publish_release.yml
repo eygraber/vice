@@ -106,7 +106,7 @@ jobs:
             sed -i -E -e 's/vice-nav(:|\/)[0-9]+\.[0-9]+\.[0-9]+/vice-nav\1${{ env.RELEASE_VERSION }}/g' README.md
 
       - name: Update package-lock.json if needed
-        run: ./gradlew kotlinUpgradePackageLock --no-build-cache --no-configuration-cache --rerun-tasks
+        run: ./gradlew kotlinUpgradePackageLock kotlinWasmUpgradePackageLock --no-build-cache --no-configuration-cache --rerun-tasks
 
       - name: Commit next dev version
         id: commit_next_dev
