@@ -16,6 +16,11 @@ import kotlin.test.assertContentEquals
 @OptIn(ExperimentalTestApi::class)
 class SerializableMutableStateSourceTest {
   @Test
+  fun `test that initial value is the correct value`() {
+    assert(ComplexSource().value == ComplexData(1))
+  }
+
+  @Test
   fun `test that complex serializable mutable state source works`() = runComposeUiTest {
     val complexSource = ComplexSource()
     val values = mutableSetOf<ComplexData>()
