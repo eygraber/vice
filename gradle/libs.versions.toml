@@ -5,8 +5,8 @@ android-sdk-compile = "36"
 android-sdk-target = "36"
 android-sdk-min = "24"
 
-composeJetbrains = "1.9.3"
-composeLifecycle = "2.9.6"
+composeJetbrains = "1.10.0-rc01"
+composeMaterial3Jetbrains = "1.9.0"
 composeNav3 = "1.0.0"
 
 conventions = "0.0.89"
@@ -21,6 +21,8 @@ kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
 
 ktlint = "1.8.0"
+
+lifecycleJetbrains = "2.9.6"
 
 publish = "0.35.0"
 
@@ -40,16 +42,18 @@ buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versio
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
-compose-lifecycle = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifecycle" }
-
+compose-animation = { module = "org.jetbrains.compose.animation:animation", version.ref="composeJetbrains" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeJetbrains" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "composeMaterial3Jetbrains" }
 compose-materialIcons = "org.jetbrains.compose.material:material-icons-core:1.7.3"
-
 compose-nav3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "composeNav3" }
 compose-nav3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "composeNav3" }
-
 compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.9.1"
 compose-navigationAndroid = "androidx.navigation:navigation-compose:2.9.6"
 compose-navigationMaterial3 = "com.eygraber:compose-material3-navigation:0.0.8"
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeJetbrains" }
+compose-runtimeSaveable = { module = "org.jetbrains.compose.runtime:runtime-saveable", version.ref = "composeJetbrains" }
+compose-uiTest = { module = "org.jetbrains.compose.ui:ui-test", version.ref = "composeJetbrains" }
 
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
@@ -61,6 +65,8 @@ kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1
 
 # not actually used; just here so renovate picks it up
 ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
+
+lifecycle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleJetbrains" }
 
 portalCompose = "com.eygraber:portal-compose:0.9.31"
 

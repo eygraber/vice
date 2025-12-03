@@ -1,4 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
@@ -23,9 +22,10 @@ kotlin {
       dependencies {
         api(projects.viceCore)
 
-        implementation(libs.compose.lifecycle)
-        api(compose.runtime)
-        api(compose.runtimeSaveable)
+        api(libs.compose.runtime)
+        api(libs.compose.runtimeSaveable)
+
+        implementation(libs.lifecycle.compose)
 
         api(libs.kotlinx.coroutines.core)
       }
@@ -41,10 +41,8 @@ kotlin {
       dependencies {
         implementation(compose.desktop.currentOs)
 
-        implementation(compose.foundation)
-
-        @OptIn(ExperimentalComposeLibrary::class)
-        implementation(compose.uiTest)
+        implementation(libs.compose.foundation)
+        implementation(libs.compose.uiTest)
 
         implementation(libs.test.kotlinx.coroutines)
         implementation(libs.test.turbine)
