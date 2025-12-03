@@ -25,9 +25,9 @@ kotlin {
     commonMain.dependencies {
       api(projects.viceCore)
 
-      implementation(compose.animation)
+      implementation(libs.compose.animation)
       api(libs.compose.navigation)
-      implementation(compose.runtime)
+      implementation(libs.compose.runtime)
 
       implementation(libs.kotlinx.coroutines.core)
     }

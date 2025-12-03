@@ -34,7 +34,7 @@ kotlin {
       dependencies {
         implementation(projects.samples.nav.shared)
 
-        implementation(compose.material3)
+        implementation(libs.compose.material3)
       }
     }
   }
