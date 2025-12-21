@@ -19,7 +19,7 @@ object TodoRepo {
   ) {
     mutableItems.value += TodoItem(
       id = Random.nextInt().toString(),
-      completed = false,
+      isCompleted = false,
       title = title,
       description = description,
     )

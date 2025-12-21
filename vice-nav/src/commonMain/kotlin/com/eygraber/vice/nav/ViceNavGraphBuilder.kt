@@ -42,11 +42,11 @@ public inline fun NavGraphBuilder.viceComposable(
     exitTransition = exitTransition,
     popEnterTransition = popEnterTransition,
     popExitTransition = popExitTransition,
-  ) {
+  ) { entry ->
     CompositionLocalProvider(
       LocalAnimatedVisibilityScope provides this,
     ) {
-      remember(it.id) { destinationFactory(it) }.Vice()
+      remember(entry.id) { destinationFactory(entry) }.Vice()
     }
   }
 }
@@ -78,11 +78,11 @@ public inline fun <reified T : Any> NavGraphBuilder.viceComposable(
     popEnterTransition = popEnterTransition,
     popExitTransition = popExitTransition,
     sizeTransform = sizeTransform,
-  ) {
+  ) { entry ->
     CompositionLocalProvider(
       LocalAnimatedVisibilityScope provides this,
     ) {
-      remember(it.id) { destinationFactory(TypedNavBackStackEntry(it.toRoute<T>(), it)) }.Vice()
+      remember(entry.id) { destinationFactory(TypedNavBackStackEntry(entry.toRoute<T>(), entry)) }.Vice()
     }
   }
 }

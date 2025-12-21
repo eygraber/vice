@@ -20,7 +20,7 @@ class HomeCompositor(
       HomeIntent.AddItem -> onNavigateToCreateItem()
       is HomeIntent.ToggleItemCompletion -> TodoRepo.updateItem(
         newItem = intent.item.copy(
-          completed = !intent.item.completed,
+          isCompleted = !intent.item.isCompleted,
         ),
       )
       is HomeIntent.NavigateToDetails -> onNavigateToUpdateItem(intent.id)

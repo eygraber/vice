@@ -13,6 +13,14 @@ pluginManagement {
 
     mavenCentral()
 
+    maven("https://central.sonatype.com/repository/maven-snapshots/") {
+      name = "Central Portal Snapshots"
+
+      mavenContent {
+        snapshotsOnly()
+      }
+    }
+
     maven("https://oss.sonatype.org/content/repositories/snapshots") {
       mavenContent {
         snapshotsOnly()
@@ -56,7 +64,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-  id("com.eygraber.conventions.settings") version "0.0.92"
+  id("com.eygraber.conventions.settings") version "0.0.93"
   id("com.gradle.develocity") version "4.3"
 }
 

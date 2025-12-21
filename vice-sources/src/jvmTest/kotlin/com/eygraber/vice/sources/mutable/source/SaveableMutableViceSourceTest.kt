@@ -177,6 +177,7 @@ class SaveableMutableViceSourceTest {
 
   private data class ComplexData(val data: Int)
 
+  @Suppress("ClassOrdering")
   private val complexDataSaver = Saver<ComplexData, Int>(
     save = {
       it.data

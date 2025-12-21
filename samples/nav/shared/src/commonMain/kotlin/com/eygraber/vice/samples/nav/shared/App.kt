@@ -33,7 +33,7 @@ fun App() {
     viceDialog<Routes.Details.Update> { entry ->
       DetailsDestination(
         op = Routes.Details.Update(
-          id = requireNotNull(entry.route.id),
+          id = entry.route.id,
         ),
         onNavigateBack = { navController.popBackStack() },
       )

@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 public abstract class StateFlowSource<T> : ViceSource<T> {
   protected abstract val flow: StateFlow<T>
 
-  protected abstract suspend fun onAttached(scope: CoroutineScope)
-
   public val value: T get() = flow.value
+
+  protected abstract suspend fun onAttached(scope: CoroutineScope)
 
   @Composable
   final override fun currentState(): T {
