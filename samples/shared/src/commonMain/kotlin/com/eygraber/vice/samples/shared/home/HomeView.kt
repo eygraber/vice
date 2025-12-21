@@ -80,7 +80,7 @@ fun HomeView(
             verticalAlignment = Alignment.CenterVertically,
           ) {
             Checkbox(
-              checked = item.completed,
+              checked = item.isCompleted,
               onCheckedChange = { onIntent(HomeIntent.ToggleItemCompletion(item)) },
             )
 
@@ -102,7 +102,7 @@ private fun TodoListPreview() {
       items = listOf(
         TodoItem(
           id = "one",
-          completed = true,
+          isCompleted = true,
           title = "Get milk",
         ),
       ),

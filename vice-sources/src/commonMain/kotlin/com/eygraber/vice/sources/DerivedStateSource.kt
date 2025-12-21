@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
 public abstract class DerivedStateSource<T>(
   initializationThreadSafetyMode: LazyThreadSafetyMode = LazyThreadSafetyMode.SYNCHRONIZED,
 ) : StateSource<T> {
-  protected abstract fun deriveState(): T
-
   private val state by lazy(initializationThreadSafetyMode) {
     derivedStateOf(::deriveState)
   }
@@ -18,6 +16,8 @@ public abstract class DerivedStateSource<T>(
   public val updates: Flow<T> get() = snapshotFlow { state.value }
 
   override val value: T get() = state.value
+
+  protected abstract fun deriveState(): T
 
   @Composable
   @ReadOnlyComposable

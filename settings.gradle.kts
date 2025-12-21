@@ -13,6 +13,14 @@ pluginManagement {
 
     mavenCentral()
 
+    maven("https://central.sonatype.com/repository/maven-snapshots/") {
+      name = "Central Portal Snapshots"
+
+      mavenContent {
+        snapshotsOnly()
+      }
+    }
+
     maven("https://oss.sonatype.org/content/repositories/snapshots") {
       mavenContent {
         snapshotsOnly()

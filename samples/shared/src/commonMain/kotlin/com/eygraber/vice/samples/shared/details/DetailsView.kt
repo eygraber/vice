@@ -61,7 +61,14 @@ fun DetailsView(
 
       item {
         Button(
-          onClick = { onIntent(DetailsIntent.Done(state.title, state.description)) },
+          onClick = {
+            onIntent(
+              DetailsIntent.Done(
+                title = state.title,
+                description = state.description,
+              ),
+            )
+          },
           enabled = state.isDoneEnabled,
         ) {
           Text("Done")
