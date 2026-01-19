@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 
 plugins {
   id("com.android.application")
-  kotlin("android")
   id("com.eygraber.conventions-kotlin-library")
   id("com.eygraber.conventions-compose-jetbrains")
   id("com.eygraber.conventions-detekt2")
