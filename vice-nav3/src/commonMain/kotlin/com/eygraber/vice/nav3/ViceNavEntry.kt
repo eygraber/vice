@@ -48,6 +48,7 @@ public fun <T, I, C, E, S> ViceNavEntry(
     },
   )
 
+@Suppress("UnnecessaryFullyQualifiedName")
 public inline fun <reified T : Any> EntryProviderScope<in T>.viceEntry(
   crossinline entryProvider: (T) -> ViceNavEntryProvider<T, *, *, *, *>,
   noinline clazzContentKey: (key: @JvmSuppressWildcards T) -> Any = { it.toString() },

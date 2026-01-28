@@ -50,6 +50,7 @@ public data class ViceArgs<I : Any, S : Any>(
   val effects: ViceEffects,
 )
 
+@Suppress("UnnecessaryFullyQualifiedName")
 @Composable
 private fun <I : Any, S : Any> ViceUdf(
   args: ViceArgs<I, S>,
