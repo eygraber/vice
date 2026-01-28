@@ -27,6 +27,7 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.TestTimeSource
 
 @OptIn(ExperimentalTestApi::class)
+@Suppress("UnnecessaryFullyQualifiedName")
 class ThrottlingIntentUiTest {
   sealed interface Intent {
     data object Regular : Intent
