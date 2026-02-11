@@ -49,7 +49,7 @@ compose-material3 = { module = "org.jetbrains.compose.material3:material3", vers
 compose-materialIcons = "org.jetbrains.compose.material:material-icons-core:1.7.3"
 compose-nav3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "composeNav3" }
 compose-nav3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "composeNav3" }
-compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.9.1"
+compose-navigation = "org.jetbrains.androidx.navigation:navigation-compose:2.9.2"
 compose-navigationAndroid = "androidx.navigation:navigation-compose:2.9.7"
 compose-navigationMaterial3 = "com.eygraber:compose-material3-navigation:0.0.8"
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeJetbrains" }
