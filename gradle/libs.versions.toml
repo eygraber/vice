@@ -23,7 +23,7 @@ kotlinx-coroutines = "1.10.2"
 
 ktlint = "1.8.0"
 
-lifecycleJetbrains = "2.9.6"
+lifecycleJetbrains = "2.10.0"
 
 publish = "0.36.0"
 
