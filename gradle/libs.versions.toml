@@ -15,7 +15,7 @@ detekt = "2.0.0-alpha.2"
 
 ktlintCustomRules = "0.1.1"
 
-dokka = "2.1.0"
+dokka = "2.2.0"
 
 kotlin = "2.3.20"
 
