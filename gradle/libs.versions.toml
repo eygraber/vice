@@ -19,7 +19,7 @@ dokka = "2.2.0"
 
 kotlin = "2.3.21"
 
-kotlinx-coroutines = "1.10.2"
+kotlinx-coroutines = "1.11.0"
 
 ktlint = "1.8.0"
 
