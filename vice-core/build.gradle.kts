@@ -48,6 +48,7 @@ kotlin {
 
         implementation(libs.compose.foundation)
         implementation(libs.compose.uiTest)
+        implementation(libs.test.kotlinx.coroutines)
       }
     }
 

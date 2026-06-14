@@ -4,7 +4,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
 import androidx.compose.runtime.saveable.SaveableStateRegistry
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.runComposeUiTest
+import androidx.compose.ui.test.v2.runComposeUiTest
 import com.eygraber.vice.sources.ViceStateRestorationTester
 import com.eygraber.vice.sources.mutableFloatSource
 import com.eygraber.vice.sources.saveableMutableFloatSource

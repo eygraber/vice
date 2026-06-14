@@ -5,7 +5,7 @@ import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
 import androidx.compose.runtime.saveable.SaveableStateRegistry
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.runComposeUiTest
+import androidx.compose.ui.test.v2.runComposeUiTest
 import com.eygraber.vice.sources.ViceStateRestorationTester
 import com.eygraber.vice.sources.saveableMutableViceSource
 import kotlin.test.Test
