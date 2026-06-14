@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.ComposeUiTest
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.runComposeUiTest
+import androidx.compose.ui.test.v2.runComposeUiTest
 import androidx.compose.ui.unit.dp
 import com.eygraber.vice.ViceCompositor
 import com.eygraber.vice.ViceContainer
@@ -18,9 +19,11 @@ import com.eygraber.vice.ViceEffects
 import com.eygraber.vice.ViceView
 import com.eygraber.vice.filter.ThrottlingIntentUiTest.Intent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.time.Duration.Companion.milliseconds
@@ -40,7 +43,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsANonThrottlingIntent_isNotThrottled() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.Regular }
       }
@@ -65,7 +68,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsAThrottlingIntent_doesNotThrottleTheFirstIntent() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.DefaultThrottlingIntent }
       }
@@ -85,7 +88,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_usingTheDefaultKey_throttles() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.DefaultThrottlingIntent }
       }
@@ -109,7 +112,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_usingTheDefaultKey_throttles_butDoesNotThrottleAThrottlingIntentWithADifferentKey() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         private var i = 0
         override val intentProvider: () -> Intent = {
@@ -143,7 +146,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_usingTheDefaultKey_throttles_andAlsoThrottlesMultipleThrottlingIntentsWithADifferentKey() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         private var i = 0
         override val intentProvider: () -> Intent = {
@@ -181,7 +184,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButtonMultipleTimes_thatEmitsThrottlingIntentsWithTheSameKey_usingTheDefaultKey_throttles() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.DefaultThrottlingIntent }
       }
@@ -213,7 +216,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_usingACustomKey_throttles() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.CustomKeyThrottlingIntent(1) }
       }
@@ -237,7 +240,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButtonMultipleTimes_thatEmitsThrottlingIntentsWithTheSameKey_usingACustomKey_throttles() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         override val intentProvider = { Intent.CustomKeyThrottlingIntent(1) }
       }
@@ -269,7 +272,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithDifferentKeys_usingTheDefaultKey_doesNotThrottle() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         private var i = 0
         override val intentProvider: () -> Intent = {
@@ -299,7 +302,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithDifferentKeys_usingACustomKey_doesNotThrottle() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val container = object : TestContainer() {
         private var i = 0
 
@@ -325,7 +328,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_doesNotThrottleAfterTheIntervalHasPassed() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val testTimeSource = TestTimeSource()
       val filter = ThrottlingIntentFilter(
         timeSource = testTimeSource,
@@ -359,7 +362,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_throttlesAfterTheIntervalHasPassed_andAnotherThrottlingIntentIsEmitted() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val testTimeSource = TestTimeSource()
       val filter = ThrottlingIntentFilter(
         timeSource = testTimeSource,
@@ -397,7 +400,7 @@ class ThrottlingIntentUiTest {
 
   @Test
   fun clickingAButton_thatEmitsThrottlingIntentsWithTheSameKey_doesNotThrottleAfterASecondThrottlingIntentIsEmitted_andTheIntervalHasPassedAgain() =
-    runComposeUiTest {
+    runThrottlingUiTest {
       val testTimeSource = TestTimeSource()
       val filter = ThrottlingIntentFilter(
         timeSource = testTimeSource,
@@ -462,6 +465,17 @@ class ThrottlingIntentUiTest {
     }
   }
 }
+
+// The throttling assertions rely on the intent-handling coroutine launched from
+// rememberCoroutineScope running eagerly, so use an UnconfinedTestDispatcher instead of
+// the StandardTestDispatcher that runComposeUiTest defaults to.
+@OptIn(ExperimentalCoroutinesApi::class, ExperimentalTestApi::class)
+private fun runThrottlingUiTest(
+  block: suspend ComposeUiTest.() -> Unit,
+) = runComposeUiTest(
+  effectContext = UnconfinedTestDispatcher(),
+  block = block,
+)
 
 private abstract class TestContainer(
   vararg intentFilters: ViceIntentFilter = arrayOf(ThrottlingIntentFilter()),
