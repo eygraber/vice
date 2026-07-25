@@ -9,7 +9,7 @@ composeJetbrains = "1.11.1"
 composeMaterial3Jetbrains = "1.9.0"
 composeNav3 = "1.1.4"
 
-conventions = "0.0.100"
+conventions = "0.0.101"
 
 detekt = "2.0.0-alpha.5"
 
