@@ -11,7 +11,7 @@ composeNav3 = "1.1.5"
 
 conventions = "0.0.102"
 
-detekt = "2.0.0-alpha.5"
+detekt = "2.0.0-alpha.6"
 
 ktlintCustomRules = "0.1.1"
 
