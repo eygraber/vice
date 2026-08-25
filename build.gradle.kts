@@ -37,6 +37,22 @@ gradleConventionsDefaults {
   }
 }
 
+// Compose 1.12.0 registers checkComposeUiTestConfigurationFor{Js,WasmJs} tasks that fail the web
+// browser test tasks of any target whose test compilation has Skiko on its classpath without
+// binaries.executable() being declared. The modules that trip it (anything depending on Compose UI)
+// have no web test sources at all, so their browser test tasks are NO-SOURCE and the check only
+// reports false positives. Declaring executables just to satisfy it would add production webpack
+// bundles (and the topLevelAwait config that Skiko needs) to every library module.
+// If web UI tests are ever added, drop this and add binaries.executable() to those targets instead.
+// https://youtrack.jetbrains.com/issue/CMP-4906
+subprojects {
+  tasks.configureEach {
+    if(name.startsWith("checkComposeUiTestConfigurationFor")) {
+      enabled = false
+    }
+  }
+}
+
 gradleConventionsKmpDefaults {
   webOptions = webOptions.copy(
     isBrowserEnabled = true,
