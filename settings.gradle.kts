@@ -55,7 +55,7 @@ dependencyResolutionManagement {
 
 plugins {
   id("com.eygraber.conventions.settings") version "0.0.102"
-  id("com.gradle.develocity") version "4.5.0"
+  id("com.gradle.develocity") version "4.5.1"
 }
 
 rootProject.name = "vice"
