@@ -27,7 +27,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: wrapper
+          gradle-version: 9.7.1
 
       - name: Run assemble task
         run: ./gradlew assemble
@@ -45,7 +45,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: wrapper
+          gradle-version: 9.7.1
 
       - name: Run detekt
         run: ./gradlew detektAll
@@ -71,7 +71,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: wrapper
+          gradle-version: 9.7.1
 
       - name: Run Android lint
         run: ./gradlew lintRelease
@@ -91,7 +91,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: wrapper
+          gradle-version: 9.7.1
 
       - name: Run tests
         run: ./gradlew allTests
@@ -114,7 +114,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: wrapper
+          gradle-version: 9.7.1
 
       - name: Check ABI compatibility
         run: ./gradlew checkLegacyAbi
