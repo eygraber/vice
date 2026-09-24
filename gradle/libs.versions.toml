@@ -7,7 +7,7 @@ android-sdk-min = "24"
 
 composeJetbrains = "1.12.1"
 composeMaterial3Jetbrains = "1.9.0"
-composeNav3 = "1.1.7"
+composeNav3 = "1.2.0"
 
 conventions = "0.0.104"
 
